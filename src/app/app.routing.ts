@@ -2,10 +2,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HeadComponent } from './head/head.component';
-
+import { LoginFirstGuard } from './loginFirst.guard';
+import { SignUpComponent } from './sign-up/sign-up.component';
 const routes: Routes = [
-  { path: 'head', component: HeadComponent },
-  { path: 'login', component: LoginComponent },
+  { path: 'head', component: HeadComponent, canActivate: [LoginFirstGuard] },
+  { path: 'login', component: LoginComponent, canActivate: [LoginFirstGuard] },
+  { path: 'sig-in', component: SignUpComponent, canActivate: [LoginFirstGuard] },
   { path: '**', redirectTo: '/login' }
 ]
 

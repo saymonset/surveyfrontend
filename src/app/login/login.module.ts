@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
+import { ServicesModule } from "../service/services.module"
 import { LoginComponent } from './login.component';
 import { RouterModule } from "@angular/router";
 import { HeadComponent } from '../head/head.component';
@@ -14,10 +15,12 @@ import { CuadrantContentComponent } from '../cuadrant-content/cuadrant-content.c
 import { CuadrantShortcutsComponent } from '../cuadrant-shortcuts/cuadrant-shortcuts.component';
 import { CuadrantChartComponent } from '../cuadrant-chart/cuadrant-chart.component';
 import { CuadrantTableComponent } from '../cuadrant-table/cuadrant-table.component';
-
+import { SignUpComponent } from '../sign-up/sign-up.component';
+import { UserDTO } from '../dto/UserDTO';
 @NgModule({
-  imports: [BrowserModule, FormsModule, RouterModule
+  imports: [BrowserModule, FormsModule, RouterModule, ServicesModule
    ],
+  providers: [UserDTO],
   declarations: [LoginComponent,
     HeadComponent,
     TitleComponent,
@@ -29,7 +32,8 @@ import { CuadrantTableComponent } from '../cuadrant-table/cuadrant-table.compone
     CuadrantContentComponent,
     CuadrantShortcutsComponent,
     CuadrantChartComponent,
-    CuadrantTableComponent],
+    CuadrantTableComponent,
+    SignUpComponent],
   exports: [LoginComponent, HeadComponent]
 })
 export class LoginModule {}

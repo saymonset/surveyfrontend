@@ -1,0 +1,71 @@
+<!-- Text Under Box -->
+<div class="login-extra">
+  Already have an account? <a  href="#" routerLink="/login">Login</a>
+</div> <!-- /login-extra -->
+
+
+<div class="account-container register stacked">
+
+  <div class="content clearfix">
+
+    <div *ngIf="orderSent" class="m-2 text-center">
+      <h2>Thanks!</h2>
+      <p>Thanks for placing your order.</p>
+      <p>We'll ship your goods as soon as possible.</p>
+      <button class="btn btn-primary" routerLink="/login">Return to Store</button>
+    </div>
+
+
+    <form *ngIf="!orderSent" #form="ngForm" novalidate
+          (ngSubmit)="submitOrder(form)" class="m-2">
+
+      <h1>Create Your Account</h1>
+
+
+      <div class="login-fields">
+
+        <p>Create your free account:</p>
+
+
+
+
+        <div class="field">
+          <label for="username">First Name:</label>
+          <input type="text" id="username"
+                 class="form-control" #username="ngModel" name="username"
+                 [(ngModel)]="userDTO.username" required
+                 placeholder="username" class="form-control" />
+          <span *ngIf="submitted && username.invalid" class="text-danger">
+               Please enter your name
+          </span>
+        </div> <!-- /field -->
+
+        <div class="field">
+          <label for="password">Password:</label>
+          <input type="text" id="password"
+                 class="form-control" #password="ngModel" name="password"
+                 [(ngModel)]="userDTO.password" required
+                 placeholder="password" class="form-control" />
+          <span *ngIf="submitted && password.invalid" class="text-danger">
+               Please enter your password
+          </span>
+        </div> <!-- /field -->
+
+        <button class="login-action btn btn-primary" type="submit">Register</button>
+      </div> <!-- .actions -->
+
+    </form>
+
+  </div> <!-- /content -->
+
+</div> <!-- /account-container -->
+
+
+<!-- Text Under Box -->
+<div class="login-extra">
+  Already have an account? <a  href="#" routerLink="/login">Login</a>
+</div> <!-- /login-extra -->
+
+
+
+
