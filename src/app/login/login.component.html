@@ -1,8 +1,12 @@
+<div class="bg-danger mt-2 p-2 text-center text-white"
+     *ngIf="errorMessage != null">
+  {{errorMessage}}
+</div>
 <div class="account-container stacked">
 
   <div class="content clearfix">
 
-    <form novalidate #form="ngForm" (ngSubmit)="submitForm(form)" (reset)="resetForm()" >
+    <form novalidate #form="ngForm" (ngSubmit)="authenticate(form)" (reset)="resetForm()" >
 
       <h1>Sign In</h1>
 
@@ -12,8 +16,8 @@
 
         <div class="field">
           	<label for="username">Usuario:</label>
-							<input  name="username"
-									[(ngModel)]="username.login"
+							<input id="username" name="username"
+									[(ngModel)]="userDTO.username"
 									placeholder="Username" required
 							        class="form-control input-lg username-field"  />
 
@@ -24,7 +28,7 @@
 							<input  type="password"
 							 		id="password"
 							        name="password"
-									[(ngModel)]="username.password"
+									[(ngModel)]="userDTO.password"
 									placeholder="Password" required
 							        class="form-control input-lg password-field"  />
 

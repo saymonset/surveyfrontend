@@ -17,10 +17,12 @@ import { CuadrantChartComponent } from '../cuadrant-chart/cuadrant-chart.compone
 import { CuadrantTableComponent } from '../cuadrant-table/cuadrant-table.component';
 import { SignUpComponent } from '../sign-up/sign-up.component';
 import { UserDTO } from '../dto/UserDTO';
+import { TokenDTO } from '../dto/TokenDTO';
+
 @NgModule({
   imports: [BrowserModule, FormsModule, RouterModule, ServicesModule
    ],
-  providers: [UserDTO],
+  providers: [UserDTO, TokenDTO],
   declarations: [LoginComponent,
     HeadComponent,
     TitleComponent,

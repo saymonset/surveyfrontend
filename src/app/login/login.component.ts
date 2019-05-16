@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { UserName } from './userName.dto';
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute, Router } from '@angular/router';
+import { UserDTO } from '../dto/UserDTO';
+import { AuthService } from "../service/auth.service";
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -9,46 +11,31 @@ import { ActivatedRoute, Router } from "@angular/router";
 })
 export class LoginComponent implements OnInit {
 
-  username: UserName = new UserName();
-
-  editing: boolean = false;
-
-  constructor(activeRoute: ActivatedRoute,
+  userDTO: UserDTO = new UserDTO();
+  public errorMessage: string;
+  constructor(private auth: AuthService,
               private router: Router) {
-    activeRoute.params.subscribe(params => {
-     /* this.editing = params["mode"] == "edit";
-      let id = params["id"];
-      if (id != null) {
-        Object.assign(this.product, model.getProduct(id) || new Product());
-      }*/
-    });
-
-
-    /*this.editing = activeRoute.snapshot.params["mode"] == "edit";
-     let id = activeRoute.snapshot.params["id"];
-
-     if (id != null) {
-     Object.assign(this.product, model.getProduct(id) || new Product());
-     }*/
   }
 
   ngOnInit() {
   }
 
-
-
-	submitForm (form: NgForm) {
-		if ( form.valid ) {
-			//this.model.saveProduct(this.product);
-			//this.product = new Product();
-			console.log("--------------------");
-			console.log(this.username.login);
-			form.reset();
-      this.router.navigateByUrl("/head");
-		}
-	}
+  authenticate(form: NgForm) {
+    if (form.valid) {
+// perform authentication
+      this.auth.authenticate(this.userDTO)
+        .subscribe(response => {
+          if (response) {
+            this.router.navigateByUrl('/head');
+          }
+          this.errorMessage = 'Authentication Failed';
+        });
+    } else {
+      this.errorMessage = 'Form Data Invalid';
+    }
+  }
 	resetForm() {
-		this.username = new UserName();
-	}
+  		this.userDTO.clear();
+	 }
 
 }

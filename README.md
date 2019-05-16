@@ -1,3 +1,8 @@
+
+http://blog.enriqueoriol.com/2017/11/httpclient-vs-http-angular.html
+
+https://jwt.io/
+
 # Surveyfrontend
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
