@@ -18,9 +18,11 @@ import { CuadrantTableComponent } from '../cuadrant-table/cuadrant-table.compone
 import { SignUpComponent } from '../sign-up/sign-up.component';
 import { UserDTO } from '../dto/UserDTO';
 import { TokenDTO } from '../dto/TokenDTO';
+import { MessageModule } from '../messages/message.module';
+import { HighchartsChartModule } from 'highcharts-angular';
 
 @NgModule({
-  imports: [BrowserModule, FormsModule, RouterModule, ServicesModule
+  imports: [BrowserModule, FormsModule, RouterModule, ServicesModule, MessageModule, HighchartsChartModule
    ],
   providers: [UserDTO, TokenDTO],
   declarations: [LoginComponent,
@@ -35,7 +37,8 @@ import { TokenDTO } from '../dto/TokenDTO';
     CuadrantShortcutsComponent,
     CuadrantChartComponent,
     CuadrantTableComponent,
-    SignUpComponent],
+    SignUpComponent
+    ],
   exports: [LoginComponent, HeadComponent]
 })
 export class LoginModule {}

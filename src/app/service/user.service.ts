@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, from } from 'rxjs';
+import { Observable, from, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { UserDTO } from '../dto/UserDTO';
 import { map } from 'rxjs/operators';
-import { Response } from '@angular/http';
-import { TokenDTO } from '../dto/TokenDTO';
+// import { Response } from '@angular/http';
+// import { TokenDTO } from '../dto/TokenDTO';
 
 const PROTOCOL = 'http';
 const PORT = 8443;
@@ -18,9 +19,11 @@ export class UserService {
 
 
   authenticate(userDTO: UserDTO): Observable<boolean> {
-    return this.http.post<any>(this.baseUrl + 'users/authenticate', userDTO, this.getOptions2()).pipe(map(response => {
+    return this.http.post<any>(this.baseUrl + 'autenticate/user', userDTO, this.getOptions2())
+      .pipe(catchError((error: Response) =>
+        throwError(`Authentication Failed. Network Error: ${error.statusText} (${error.status})`)))
+      .pipe(map(response => {
       this.auth_token = response.success ? response.token : null;
-      console.log('Token saymon = ' + this.auth_token)
       return response.success;
     }));
   }
@@ -47,7 +50,14 @@ export class UserService {
       headers: new HttpHeaders({
         'Authorization': `Bearer<${this.auth_token}>`
       })
-    }
+    };
   }
-
+/*  private sendAutenticateRequest<T>(verb: string, url: string, body?: UserDTO)
+  : Observable<T> {
+    const myHeaders = this.getOptions;
+    return this.http.request<T>(verb, url, {
+      body: body,
+      headers: myHeaders
+    });
+  }*/
 }

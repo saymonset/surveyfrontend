@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import * as Highcharts from 'highcharts';
 @Component({
   selector: 'app-cuadrant-chart',
   templateUrl: './cuadrant-chart.component.html',
@@ -11,5 +11,13 @@ export class CuadrantChartComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  Highcharts: typeof Highcharts = Highcharts;
+  chartOptions: Highcharts.Options = {
+    series: [{
+      data: [1, 2, 3],
+      type: 'line'
+    }]
+  };
 
 }
