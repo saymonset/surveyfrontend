@@ -20,9 +20,11 @@ import { UserDTO } from '../dto/UserDTO';
 import { TokenDTO } from '../dto/TokenDTO';
 import { MessageModule } from '../messages/message.module';
 import { HighchartsChartModule } from 'highcharts-angular';
-
+import { PositioningComponent } from '../positioning/positioning.component';
+import { TreeModule } from 'ng2-tree';
 @NgModule({
-  imports: [BrowserModule, FormsModule, RouterModule, ServicesModule, MessageModule, HighchartsChartModule
+  imports: [BrowserModule, FormsModule, RouterModule, ServicesModule, MessageModule, HighchartsChartModule,
+    TreeModule
    ],
   providers: [UserDTO, TokenDTO],
   declarations: [LoginComponent,
@@ -37,7 +39,8 @@ import { HighchartsChartModule } from 'highcharts-angular';
     CuadrantShortcutsComponent,
     CuadrantChartComponent,
     CuadrantTableComponent,
-    SignUpComponent
+    SignUpComponent,
+    PositioningComponent
     ],
   exports: [LoginComponent, HeadComponent]
 })

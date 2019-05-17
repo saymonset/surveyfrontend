@@ -31,11 +31,12 @@
                   "src/app/css/base-admin-3-responsive.css",
                    "src/app/css/pages/signin.css",
                     "src/app/css/custom.css",
-                     "src/app/css/pages/dashboard.css"
+                     "src/app/css/pages/dashboard.css",
+                   "node_modules/ng2-tree/styles.css"
 
-  
+
             ],
-            "scripts": [ 
+            "scripts": [
 
               "src/app/js/libs/jquery-1.9.1.min.js",
               "src/app/js/libs/jquery-ui-1.10.0.custom.min.js",
@@ -48,8 +49,8 @@
               "src/app/js/charts/area.js",
               "src/app/js/charts/donut.js"
             ]
- 
- 
+
+
 
 
 

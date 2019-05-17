@@ -5,9 +5,11 @@ import { LoginModule } from './login/login.module';
 import { routing } from './app.routing';
 import { LoginFirstGuard } from './loginFirst.guard';
 
+
 @NgModule({
   declarations: [
     AppComponent
+
   ],
   imports: [
     BrowserModule,
