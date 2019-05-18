@@ -18,6 +18,7 @@ import { CuadrantTableComponent } from '../cuadrant-table/cuadrant-table.compone
 import { SignUpComponent } from '../sign-up/sign-up.component';
 import { UserDTO } from '../dto/UserDTO';
 import { TokenDTO } from '../dto/TokenDTO';
+import { TreeModelDTO } from '../dto/TreeModelDTO';
 import { MessageModule } from '../messages/message.module';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { PositioningComponent } from '../positioning/positioning.component';
@@ -26,7 +27,7 @@ import { TreeModule } from 'ng2-tree';
   imports: [BrowserModule, FormsModule, RouterModule, ServicesModule, MessageModule, HighchartsChartModule,
     TreeModule
    ],
-  providers: [UserDTO, TokenDTO],
+  providers: [UserDTO, TokenDTO, TreeModelDTO],
   declarations: [LoginComponent,
     HeadComponent,
     TitleComponent,
