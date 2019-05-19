@@ -24,12 +24,18 @@ import { HighchartsChartModule } from 'highcharts-angular';
 import { PositioningComponent } from '../positioning/positioning.component';
 import { TreeModule } from 'ng2-tree';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { IgxCalendarModule } from 'igniteui-angular';
+import { IgxCalendarModule, IgxDatePickerModule, IgxExpansionPanelModule   } from 'igniteui-angular';
 import { CalendarComponent } from '../calendar/calendar.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 @NgModule({
   imports: [BrowserModule, FormsModule, RouterModule, ServicesModule, MessageModule, HighchartsChartModule,
-    TreeModule, BrowserAnimationsModule, IgxCalendarModule
-   ],
+    TreeModule, BrowserAnimationsModule, IgxCalendarModule, IgxDatePickerModule, IgxExpansionPanelModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    })
+  ],
   providers: [UserDTO, TokenDTO, TreeModelDTO],
   declarations: [LoginComponent,
     HeadComponent,

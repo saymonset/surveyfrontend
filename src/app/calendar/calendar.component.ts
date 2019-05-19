@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import { IgxCalendarComponent } from 'igniteui-angular';
+import { IgxCalendarComponent, IgxDatePickerModule } from 'igniteui-angular';
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
@@ -12,5 +12,10 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit() {
   }
+// date-picker-sample.component.ts
+
+
+  public date: Date = new Date(Date.now());
+
 
 }
