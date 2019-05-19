@@ -23,9 +23,12 @@ import { MessageModule } from '../messages/message.module';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { PositioningComponent } from '../positioning/positioning.component';
 import { TreeModule } from 'ng2-tree';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { IgxCalendarModule } from 'igniteui-angular';
+import { CalendarComponent } from '../calendar/calendar.component';
 @NgModule({
   imports: [BrowserModule, FormsModule, RouterModule, ServicesModule, MessageModule, HighchartsChartModule,
-    TreeModule
+    TreeModule, BrowserAnimationsModule, IgxCalendarModule
    ],
   providers: [UserDTO, TokenDTO, TreeModelDTO],
   declarations: [LoginComponent,
@@ -41,7 +44,8 @@ import { TreeModule } from 'ng2-tree';
     CuadrantChartComponent,
     CuadrantTableComponent,
     SignUpComponent,
-    PositioningComponent
+    PositioningComponent,
+    CalendarComponent
     ],
   exports: [LoginComponent, HeadComponent]
 })

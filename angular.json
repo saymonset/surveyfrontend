@@ -22,8 +22,13 @@
               "src/favicon.ico",
               "src/assets"
             ],
+
+
+
+
             "styles": [
               "src/styles.css",
+
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
                "src/app/css/font-awesome.min.css",
                 "src/app/css/ui-lightness/jquery-ui-1.10.0.custom.min.css",
@@ -37,7 +42,7 @@
 
             ],
             "scripts": [
-
+              "node_modules/hammerjs/hammer.js",
               "src/app/js/libs/jquery-1.9.1.min.js",
               "src/app/js/libs/jquery-ui-1.10.0.custom.min.js",
               "src/app/js/plugins/flot/jquery.flot.js",
