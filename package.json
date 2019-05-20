@@ -31,6 +31,9 @@
     "ng2-tree": "^2.0.0-rc.11",
     "rxjs": "6.5.2",
     "rxjs-compat": "^6.5.2",
+    "survey-angular": "^1.0.85",
+    "survey-creator": "^1.0.85",
+    "surveyjs-widgets": "^1.0.85",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {

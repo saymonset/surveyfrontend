@@ -28,6 +28,10 @@ import { IgxCalendarModule, IgxDatePickerModule, IgxExpansionPanelModule   } fro
 import { CalendarComponent } from '../calendar/calendar.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+
+
+
+
 @NgModule({
   imports: [BrowserModule, FormsModule, RouterModule, ServicesModule, MessageModule, HighchartsChartModule,
     TreeModule, BrowserAnimationsModule, IgxCalendarModule, IgxDatePickerModule, IgxExpansionPanelModule,

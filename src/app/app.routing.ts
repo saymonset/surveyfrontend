@@ -4,7 +4,9 @@ import { LoginComponent } from './login/login.component';
 import { HeadComponent } from './head/head.component';
 import { LoginFirstGuard } from './loginFirst.guard';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { SurveytestComponent } from './surveytest/surveytest.component';
 const routes: Routes = [
+  { path: 'survey', component: SurveytestComponent, canActivate: [LoginFirstGuard] },
   { path: 'head', component: HeadComponent, canActivate: [LoginFirstGuard] },
   { path: 'login', component: LoginComponent, canActivate: [LoginFirstGuard] },
   { path: 'sig-in', component: SignUpComponent, canActivate: [LoginFirstGuard] },

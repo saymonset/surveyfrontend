@@ -5,11 +5,15 @@ import { LoginModule } from './login/login.module';
 import { routing } from './app.routing';
 import { LoginFirstGuard } from './loginFirst.guard';
 
+import { SurveyComponent } from './survey/survey.component';
+import { SurveytestComponent } from './surveytest/surveytest.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SurveyComponent,
+    SurveytestComponent
 
 
   ],
