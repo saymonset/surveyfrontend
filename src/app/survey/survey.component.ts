@@ -18,9 +18,20 @@ widgets.autocomplete(Survey);
 widgets.bootstrapslider(Survey);
 widgets.prettycheckbox(Survey);
 
-Survey.JsonObject.metaData.addProperty('questionbase', 'popupdescription:text');
+/*Survey.JsonObject.metaData.addProperty('questionbase', 'popupdescription:text');
 Survey.JsonObject.metaData.addProperty('page', 'popupdescription:text');
+*/
+Survey.Survey.cssType = 'bootstrap';
+Survey.defaultBootstrapMaterialCss.navigationButton = "btn btn-green";
+Survey.defaultBootstrapMaterialCss.rating.item = "btn btn-default my-rating";
+Survey.StylesManager.applyTheme("bootstrapmaterial");
+/*
+Survey.defaultBootstrapMaterialCss.navigationButton = 'btn btn-green';
+Survey.defaultBootstrapMaterialCss.rating.item = 'btn btn-default my-rating';
+Survey.StylesManager.applyTheme('bootstrapmaterial');
+*/
 
+// Survey.StylesManager.applyTheme('node_modules/bootstrap/dist/css/bootstrap.css');
 @Component({
   // tslint:disable-next-line:component-selector
   selector: 'survey',
@@ -39,10 +50,9 @@ export class SurveyComponent implements OnInit {
   }
 
   ngOnInit() {
-    Survey.Survey.cssType = "bootstrap";
-//    Survey.defaultBootstrapCss.navigationButton = "btn btn-blue";
+
     const surveyModel = new Survey.Model(this.json);
-    surveyModel.onAfterRenderQuestion.add((survey, options) => {
+    /*surveyModel.onAfterRenderQuestion.add((survey, options) => {
       if (!options.question.popupdescription) { return; }
 
       // Add a button;
@@ -59,43 +69,14 @@ export class SurveyComponent implements OnInit {
       span.innerHTML = '  ';
       header.appendChild(span);
       header.appendChild(btn);
-    });
+    });*/
     surveyModel.onComplete
       .add(result =>
         this.submitSurvey.emit(result.data)
       );
-    Survey.SurveyNG.render('surveyElement', { model: surveyModel });
+    Survey.SurveyNG.render('surveyElement', {
+      model: surveyModel
+
+    });
   }
 }
-
-/**
- *    console.log(JSON.stringify($rootScope.survey));
- var model = new Survey.Model(JSON.stringify($rootScope.survey));
- model.onComplete.add(function (surveyresult) {
-        var result = {};
-        result.result = surveyresult.data;
-        result.survey = $rootScope.survey;
-        result.surveyid = $rootScope.surveyid;
-        result.mazdacode = $rootScope.mazdacode;
-        result.clientid = $rootScope.clientid;
-        result.name = $rootScope.name;
-        result.surname = $rootScope.surname;
-        result.email = $rootScope.email;
-        result.branch = $rootScope.branch;
-        result.segment = $rootScope.segment;
-        result.segmentId = $rootScope.segmentId;
-        result.cluster = $rootScope.cluster;
-        result.criticalmoment = $rootScope.criticalmoment;
-        result.lang = $rootScope.lang;
-        SurveyService.save(result).then(function (data) {
-
-            for (var prop in $rootScope) {
-                if (prop.substring(0, 1) !== '$' && prop.substring(0, 6) !== 'device') {
-                    delete $rootScope[prop];
-                }
-            }
-        });
-    });
- //$("#surveyElement").Survey({model: model});
- model.render("surveyElement");
- * */

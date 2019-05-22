@@ -3,20 +3,19 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { TreeModel, NodeEvent } from 'ng2-tree';
 import { TreeService } from '../service/tree.service';
 @Component({
-  selector: 'app-positioning',
-  templateUrl: './positioning.component.html',
-  styleUrls: ['./positioning.component.css']
+  selector: 'app-division-servicio',
+  templateUrl: './division-servicio.component.html'
 })
-export class PositioningComponent implements OnInit {
+export class DivisionServicioComponent implements OnInit {
 
   public tree: TreeModel;
 
   constructor(private treeService: TreeService) { }
   ngOnInit() {
-    this.treeService.getTreeTerritorial()
+    this.treeService.getTreeServicio()
       .subscribe(response => {
         console.log();
-     //   alert(response[0]);
+        //   alert(response[0]);
         this.tree = response[0] as TreeModel;
       });
   }

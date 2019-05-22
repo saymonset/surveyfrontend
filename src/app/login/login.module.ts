@@ -18,17 +18,18 @@ import { CuadrantTableComponent } from '../cuadrant-table/cuadrant-table.compone
 import { SignUpComponent } from '../sign-up/sign-up.component';
 import { UserDTO } from '../dto/UserDTO';
 import { TokenDTO } from '../dto/TokenDTO';
-import { TreeModelDTO } from '../dto/TreeModelDTO';
+import { TreeModelTerritorialDTO } from '../dto/TreeModelTerritorialDTO';
 import { MessageModule } from '../messages/message.module';
 import { HighchartsChartModule } from 'highcharts-angular';
-import { PositioningComponent } from '../positioning/positioning.component';
+import { DivisionTerritorialComponent } from '../division-territorial/division-territorial.component';
+import { DivisionServicioComponent } from '../division-servicio/division-servicio.component';
 import { TreeModule } from 'ng2-tree';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IgxCalendarModule, IgxDatePickerModule, IgxExpansionPanelModule   } from 'igniteui-angular';
 import { CalendarComponent } from '../calendar/calendar.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
-
+import { SearchComponent } from '../search/search.component';
 
 
 
@@ -40,8 +41,10 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
       useFactory: adapterFactory
     })
   ],
-  providers: [UserDTO, TokenDTO, TreeModelDTO],
+  providers: [UserDTO, TokenDTO, TreeModelTerritorialDTO],
   declarations: [LoginComponent,
+    DivisionServicioComponent,
+    DivisionTerritorialComponent,
     HeadComponent,
     TitleComponent,
     ToolbarComponent,
@@ -54,8 +57,8 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
     CuadrantChartComponent,
     CuadrantTableComponent,
     SignUpComponent,
-    PositioningComponent,
-    CalendarComponent
+    CalendarComponent,
+    SearchComponent
     ],
   exports: [LoginComponent, HeadComponent]
 })

@@ -3,11 +3,10 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { TreeModel, NodeEvent } from 'ng2-tree';
 import { TreeService } from '../service/tree.service';
 @Component({
-  selector: 'app-positioning',
-  templateUrl: './positioning.component.html',
-  styleUrls: ['./positioning.component.css']
+  selector: 'app-division-territorial',
+  templateUrl: './division-territorial.component.html'
 })
-export class PositioningComponent implements OnInit {
+export class DivisionTerritorialComponent implements OnInit {
 
   public tree: TreeModel;
 
@@ -16,7 +15,7 @@ export class PositioningComponent implements OnInit {
     this.treeService.getTreeTerritorial()
       .subscribe(response => {
         console.log();
-     //   alert(response[0]);
+        //   alert(response[0]);
         this.tree = response[0] as TreeModel;
       });
   }
@@ -27,4 +26,5 @@ export class PositioningComponent implements OnInit {
   public logEvent(e: NodeEvent): void {
     console.log(e.node.id + ", value = " + e.node.value);
   }
+
 }

@@ -8,7 +8,11 @@
       "sourceRoot": "src",
       "projectType": "application",
       "prefix": "app",
-      "schematics": {},
+      "schematics": {
+      /*  "@schematics/angular:component": {
+          "styleext": "src/app/scss"
+        }*/
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -30,11 +34,11 @@
               "src/styles.css",
               "node_modules/angular-calendar/css/angular-calendar.css",
               "node_modules/igniteui-angular/styles/igniteui-angular.css",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/bootstrap/dist/css/bootstrap.css",
                "src/app/css/font-awesome.min.css",
                 "src/app/css/ui-lightness/jquery-ui-1.10.0.custom.min.css",
                  "src/app/css/base-admin-3.css",
-                  "src/app/css/base-admin-3-responsive.css",
+                 "src/app/css/base-admin-3-responsive.css",
                    "src/app/css/pages/signin.css",
                     "src/app/css/custom.css",
                      "src/app/css/pages/dashboard.css",

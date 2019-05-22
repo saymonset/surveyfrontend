@@ -1,16 +1,41 @@
-<div class="widget stacked">
 
-  <div class="widget-header">
-    <i class="icon-search"></i>
-    <h3>Desde</h3>
-  </div> <!-- /widget-header -->
-  <div class="widget-content">
-    <div class="shortcuts">
-        <span class="shortcut-label"><igx-date-picker locale="es-VE" [(ngModel)]="date"></igx-date-picker></span>
-    </div> <!-- /shortcuts -->
+    <div class="row">
+      <div class="col-md-6 col-xs-12">
+        <div class="widget stacked">
+          <div class="widget-header">
+            <i class="icon-search"></i>
+            <h3>Desde</h3>
+          </div> <!-- /widget-header -->
+          <div class="widget-content">
+            <div class="shortcuts">
+              <span class="shortcut-label"><igx-date-picker locale="es-VE" [(ngModel)]="date"></igx-date-picker></span>
+            </div> <!-- /shortcuts -->
+          </div> <!-- /widget-content -->
+        </div> <!-- /widget -->
 
-  </div> <!-- /widget-content -->
+      </div>
+      <div class="col-md-6">
+        <div class="widget stacked">
+          <div class="widget-header">
+            <i class="icon-search"></i>
+            <h3>Hasta</h3>
+          </div> <!-- /widget-header -->
+          <div class="widget-content">
+            <div class="shortcuts">
+              <span class="shortcut-label"><igx-date-picker locale="es-VE" [(ngModel)]="date"></igx-date-picker></span>
+            </div> <!-- /shortcuts -->
+          </div> <!-- /widget-content -->
+        </div> <!-- /widget -->
+      </div>
+      <div class="col-md-6 col-xs-12">
+       <app-division-territorial></app-division-territorial>
 
-</div> <!-- /widget -->
+      </div>
+      <div class="col-md-6">
+        <app-division-servicio></app-division-servicio>
+      </div>
+    </div>
+
+
 
 

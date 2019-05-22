@@ -9,11 +9,14 @@ import { SurveyComponent } from './survey/survey.component';
 import { SurveytestComponent } from './surveytest/surveytest.component';
 
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
     SurveyComponent,
     SurveytestComponent
+
 
 
   ],

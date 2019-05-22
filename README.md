@@ -3,6 +3,18 @@ http://blog.enriqueoriol.com/2017/11/httpclient-vs-http-angular.html
 
 https://jwt.io/
 
+
+//Mandar correos
+@RequestMapping(RestType.PATH_SURVEY)
+public class SurveyREST {
+
+public class SurveyMazdaService ->
+        public Map<String, Object> sendMassEmails(List<SurveyMazda> surveyMazdaList, String type){
+        
+// Manda la encuesta
+        @Service
+        public class SurveyRequestService {
+
 # Surveyfrontend
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.

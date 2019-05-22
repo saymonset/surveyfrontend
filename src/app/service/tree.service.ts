@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, from, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { TreeModelDTO } from '../dto/TreeModelDTO';
+import { TreeModelTerritorialDTO } from '../dto/TreeModelTerritorialDTO';
+import { TreeModelServicioDTO } from '../dto/TreeModelServicioDTO';
+
 import { map } from 'rxjs/operators';
 
 const PROTOCOL = 'http';
@@ -15,8 +17,12 @@ export class TreeService {
     this.baseUrl = `${PROTOCOL}://${location.hostname}:${PORT}/`;
   }
 
-  getTrees(): Observable<TreeModelDTO[]> {
-    return this.http.get<TreeModelDTO[]>(this.baseUrl + "positioning/all");
+  getTreeTerritorial(): Observable<TreeModelTerritorialDTO[]> {
+    return this.http.get<TreeModelTerritorialDTO[]>(this.baseUrl + "tree/territorial");
+  }
+
+  getTreeServicio(): Observable<TreeModelServicioDTO[]> {
+    return this.http.get<TreeModelServicioDTO[]>(this.baseUrl + "tree/servicio");
   }
 
   private getOptions() {
@@ -27,3 +33,4 @@ export class TreeService {
     }
   }
 }
+
