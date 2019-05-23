@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule  } from "@angular/forms";
+import { HttpClientModule } from '@angular/common/http';
 import { ServicesModule } from "../service/services.module"
 import { LoginComponent } from './login.component';
 import { RouterModule } from "@angular/router";
@@ -30,11 +31,11 @@ import { CalendarComponent } from '../calendar/calendar.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { SearchComponent } from '../search/search.component';
-
+import { UploadsComponent } from '../uploads/uploads.component';
 
 
 @NgModule({
-  imports: [BrowserModule, FormsModule, RouterModule, ServicesModule, MessageModule, HighchartsChartModule,
+  imports: [HttpClientModule, ReactiveFormsModule , BrowserModule, FormsModule, RouterModule, ServicesModule, MessageModule, HighchartsChartModule,
     TreeModule, BrowserAnimationsModule, IgxCalendarModule, IgxDatePickerModule, IgxExpansionPanelModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
@@ -42,7 +43,7 @@ import { SearchComponent } from '../search/search.component';
     })
   ],
   providers: [UserDTO, TokenDTO, TreeModelTerritorialDTO],
-  declarations: [LoginComponent,
+  declarations: [UploadsComponent, LoginComponent,
     DivisionServicioComponent,
     DivisionTerritorialComponent,
     HeadComponent,
