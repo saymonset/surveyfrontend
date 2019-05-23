@@ -61,6 +61,6 @@ import { UploadsComponent } from '../uploads/uploads.component';
     CalendarComponent,
     SearchComponent
     ],
-  exports: [LoginComponent, HeadComponent]
+  exports: [LoginComponent, HeadComponent, UploadsComponent]
 })
 export class LoginModule {}

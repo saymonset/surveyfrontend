@@ -1,24 +1,48 @@
-<h1>Upload</h1>
-<div>
-  <div *ngIf="error">
-    {{ error.message }}
+
+
+<app-title></app-title>
+
+<app-toolbar></app-toolbar>
+
+
+
+<div class="row">
+  <div class="col-md-12 col-xs-12">
+    <div class="widget stacked">
+      <div class="widget-header">
+        <i class="icon-search"></i>
+        <h3>Mandar Encuestas</h3>
+      </div> <!-- /widget-header -->
+      <div class="widget-content">
+        <div class="shortcuts">
+          <div>
+            <div *ngIf="error">
+              {{ error.message }}
+            </div>
+            <div *ngIf="uploadResponse.status === 'error'">
+              {{ uploadResponse.message }}
+            </div>
+            <div *ngIf="uploadResponse.status === 'progress'">
+
+
+              <div role="progressbar" [style.width.%]="uploadResponse.message" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                {{uploadResponse.message}}%
+              </div>
+
+            </div>
+
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+              <input type="file" name="avatar" (change)="onFileChange($event)" />
+              <button type="submit">Upload</button>
+
+            </form>
+          </div>
+        </div> <!-- /shortcuts -->
+
+      </div> <!-- /widget-content -->
+    </div> <!-- /widget -->
+
   </div>
-  <div *ngIf="uploadResponse.status === 'error'">
-    {{ uploadResponse.message }}
-  </div>
-  <div *ngIf="uploadResponse.status === 'progress'">
 
-
-    <div role="progressbar" [style.width.%]="uploadResponse.message" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-      {{uploadResponse.message}}%
-    </div>
-
-  </div>
-
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
-
-    <input type="file" name="avatar" (change)="onFileChange($event)" />
-    <button type="submit">Upload</button>
-
-  </form>
 </div>
