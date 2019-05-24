@@ -32,7 +32,7 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { SearchComponent } from '../search/search.component';
 import { UploadsComponent } from '../uploads/uploads.component';
-
+import { SendSurveyComponent } from '../send-survey/send-survey.component';
 
 @NgModule({
   imports: [HttpClientModule, ReactiveFormsModule , BrowserModule, FormsModule, RouterModule, ServicesModule, MessageModule, HighchartsChartModule,
@@ -59,8 +59,9 @@ import { UploadsComponent } from '../uploads/uploads.component';
     CuadrantTableComponent,
     SignUpComponent,
     CalendarComponent,
-    SearchComponent
+    SearchComponent,
+    SendSurveyComponent
     ],
-  exports: [LoginComponent, HeadComponent, UploadsComponent]
+  exports: [LoginComponent, HeadComponent, UploadsComponent, SendSurveyComponent]
 })
 export class LoginModule {}

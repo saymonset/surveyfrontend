@@ -3,29 +3,29 @@ import { HttpClient, HttpEvent, HttpErrorResponse, HttpEventType} from '@angular
 import { throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 @Injectable()
-export class FileUploadService {
+export class SendSurveyService {
 
   apiUrl = 'http://localhost:8443/send/survey';
 
   constructor(private http: HttpClient) { }
 
-  upload(formData) {
+  send(formData) {
     return this.http.post<any>(`${this.apiUrl}`, formData, {
       reportProgress: true,
       observe: 'events'
     }).pipe(map((event) => {
-      switch (event.type) {
+        switch (event.type) {
 
-        case HttpEventType.UploadProgress:
-          const progress = Math.round(100 * event.loaded / event.total);
-          return { status: 'progress', message: progress };
+          case HttpEventType.UploadProgress:
+            const progress = Math.round(100 * event.loaded / event.total);
+            return { status: 'progress', message: progress };
 
-        case HttpEventType.Response:
-          return event.body;
-        default:
-          return `Unhandled event: ${event.type}`;
-      }
-    })
+          case HttpEventType.Response:
+            return event.body;
+          default:
+            return `Unhandled event: ${event.type}`;
+        }
+      })
     );
   }
 

@@ -18,11 +18,13 @@ export class TreeService {
   }
 
   getTreeTerritorial(): Observable<TreeModelTerritorialDTO[]> {
-    return this.http.get<TreeModelTerritorialDTO[]>(this.baseUrl + "tree/territorial");
+    return this.http.get<TreeModelTerritorialDTO[]>(this.baseUrl + "tree/territorial",
+      this.getOptions());
   }
 
   getTreeServicio(): Observable<TreeModelServicioDTO[]> {
-    return this.http.get<TreeModelServicioDTO[]>(this.baseUrl + "tree/servicio");
+    return this.http.get<TreeModelServicioDTO[]>(this.baseUrl + "tree/servicio",
+      this.getOptions());
   }
 
   private getOptions() {
