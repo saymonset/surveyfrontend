@@ -16,9 +16,10 @@ export class DivisionTerritorialComponent implements OnInit {
   ngOnInit() {
     this.treeService.getTreeTerritorial()
       .subscribe(response => {
-        console.log();
+
         //   alert(response[0]);
         this.tree = response[0] as TreeModel;
+        /*console.log(JSON.stringify(this.tree));*/
       });
   }
 
