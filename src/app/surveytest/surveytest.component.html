@@ -1,2 +1,7 @@
- <survey [json]="json" (submitSurvey)="sendData($event)"></survey>
+<!-- -->
+<!---->
+
+<div *ngIf="surveyDTO.json">
+  <survey [json]="surveyDTO.json" (submitSurvey)="sendData($event)"></survey>
+   </div>
 <div id="surveyResult"></div>
