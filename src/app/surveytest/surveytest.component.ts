@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
+import { ActivatedRoute } from '@angular/router';
+import { SendSurveyService } from '../service/send-survey';
+import { SurveyDTO } from '../dto/SurveyDTO';
 @Component({
   selector: 'app-surveytest',
   templateUrl: './surveytest.component.html',
@@ -7,10 +9,35 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SurveytestComponent implements OnInit {
 
-    constructor() { }
+
+  error: string;
+  response : SurveyDTO;
+  codigoEncuesta: string = '';
+  email : string = '';
+  lang : string = '';
+
+  constructor(private route: ActivatedRoute, private sendSurveyService: SendSurveyService) {
+ }
+
+
 
   ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      this.codigoEncuesta = params['codigoEncuesta'];
+      this.email = params['email'];
+      this.lang =  params['lang'];
+    });
+
+    this.sendSurveyService.sentVerify(this.codigoEncuesta, this.email, this.lang ).subscribe(
+      (res) => this.response = res,
+      (err) => this.error = err
+    );
+
+    console.log(JSON.stringify(this.response));
+
   }
+
+
 
   title = "app works!";
 
@@ -84,6 +111,12 @@ export class SurveytestComponent implements OnInit {
   sendData(result) {
     //TODO update with your own behavior
     console.log(result);
+
+    this.sendSurveyService.sentResult(result).subscribe(
+      (res) => this.response = res,
+      (err) => this.error = err
+    );
+
     document
       .querySelector('#surveyResult')
       .innerHTML = "result: " + JSON.stringify(result);

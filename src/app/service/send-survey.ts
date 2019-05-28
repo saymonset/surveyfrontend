@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpEvent, HttpErrorResponse, HttpEventType} from '@angular/common/http';
-import { throwError } from 'rxjs';
+import { throwError, Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { SurveyDTO } from '../dto/SurveyDTO';
 @Injectable()
 export class SendSurveyService {
 
-  apiUrl = 'http://localhost:8443/send/survey';
-
+  apiUrl = 'http://localhost:8443/survey/send';
+  apiUrlSent = "http://localhost:8443/survey/sent?";
+  apiUrlSentResult = "http://localhost:8443/survey/sent/result";
   constructor(private http: HttpClient) { }
 
   send(formData) {
@@ -27,6 +29,14 @@ export class SendSurveyService {
         }
       })
     );
+  }
+
+  sentVerify(codigoEncuesta, email, lang): Observable<SurveyDTO> {
+    return  this.http.get<SurveyDTO>(this.apiUrlSent + "codigoEncuesta="+codigoEncuesta+"&email="+email+"&lang=" + lang);
+  }
+
+  sentResult(objecto: object): Observable<SurveyDTO> {
+    return  this.http.post<SurveyDTO>(this.apiUrlSentResult,objecto );
   }
 
   private getEventMessage(event: HttpEvent<any>, formData) {

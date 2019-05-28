@@ -18,20 +18,20 @@ export class SendSurveyComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.formBuilder.group({
-      avatar: ['']
+      file: ['']
     });
   }
 
   onFileChange(event) {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
-      this.form.get('avatar').setValue(file);
+      this.form.get('file').setValue(file);
     }
   }
 
   onSubmit() {
     const formData = new FormData();
-    formData.append('file', this.form.get('avatar').value);
+    formData.append('file', this.form.get('file').value);
     this.sendSurveyService.send(formData).subscribe(
       (res) => this.sendResponse = res,
       (err) => this.error = err

@@ -9,7 +9,7 @@ import { UploadsComponent } from './uploads/uploads.component';
 import { SendSurveyComponent } from './send-survey/send-survey.component';
 const routes: Routes = [
   { path: 'sendSurvey', component: SendSurveyComponent, canActivate: [LoginFirstGuard] },
-  { path: 'survey', component: SurveytestComponent, canActivate: [LoginFirstGuard] },
+  { path: 'survey', component: SurveytestComponent },
   { path: 'head', component: HeadComponent, canActivate: [LoginFirstGuard] },
   { path: 'login', component: LoginComponent, canActivate: [LoginFirstGuard] },
   { path: 'sig-in', component: SignUpComponent, canActivate: [LoginFirstGuard] },
