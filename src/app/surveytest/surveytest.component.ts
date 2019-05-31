@@ -36,8 +36,6 @@ export class SurveytestComponent implements OnInit {
 
 
 
-
-
   onSurveySaved(survey) {
     this.json = survey;
   }
@@ -46,7 +44,12 @@ export class SurveytestComponent implements OnInit {
     //TODO update with your own behavior
     console.log(result);
 
-    this.sendSurveyService.sentResult(result).subscribe(
+    let resultAll = {result: {}, surveyDTO: {}, origin: {}};
+
+    resultAll.result = result;
+    resultAll.origin = JSON.parse(this.surveyDTO.json);
+    resultAll.surveyDTO = this.surveyDTO;
+    this.sendSurveyService.sentResult(resultAll).subscribe(
       (res) => this.surveyDTO = res,
       (err) => this.error = err
     );

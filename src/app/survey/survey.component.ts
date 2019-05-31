@@ -21,21 +21,33 @@ widgets.prettycheckbox(Survey);
 /*Survey.JsonObject.metaData.addProperty('questionbase', 'popupdescription:text');
 Survey.JsonObject.metaData.addProperty('page', 'popupdescription:text');
 */
-Survey.Survey.cssType = 'bootstrap';
+/*Survey.Survey.cssType = 'bootstrap';
 Survey.defaultBootstrapMaterialCss.navigationButton = "btn btn-green";
 Survey.defaultBootstrapMaterialCss.rating.item = "btn btn-default my-rating";
-Survey.StylesManager.applyTheme("bootstrapmaterial");
+Survey.StylesManager.applyTheme("bootstrapmaterial");*/
 /*
 Survey.defaultBootstrapMaterialCss.navigationButton = 'btn btn-green';
 Survey.defaultBootstrapMaterialCss.rating.item = 'btn btn-default my-rating';
 Survey.StylesManager.applyTheme('bootstrapmaterial');
 */
-
 // Survey.StylesManager.applyTheme('node_modules/bootstrap/dist/css/bootstrap.css');
+/*Survey.defaultBootstrapMaterialCss.navigationButton = "btn btn-green";
+Survey.defaultBootstrapMaterialCss.rating.item = "btn btn-default my-rating";
+Survey.StylesManager.applyTheme("bootstrapmaterial");
+Survey
+  .StylesManager
+  .applyTheme();*/
+// Survey.Survey.cssType = 'bootstrap'
+Survey
+  .StylesManager
+  .applyTheme("bootstrap");
+Survey.defaultBootstrapCss.navigationButton = "btn btn-green";
+Survey.defaultBootstrapMaterialCss.navigationButton = "btn btn-green";
+Survey.defaultBootstrapMaterialCss.rating.item = "btn btn-default my-rating";
 @Component({
   // tslint:disable-next-line:component-selector
   selector: 'survey',
-  template: `<div class='survey-container contentcontainer codecontainer'><div id='surveyElement'></div></div>`
+  template: `<div><div id='surveyElement'></div></div>`
 })
 export class SurveyComponent implements OnInit {
   @Output() submitSurvey = new EventEmitter<any>();
@@ -49,28 +61,13 @@ export class SurveyComponent implements OnInit {
 
   }
 
+
+
+
   ngOnInit() {
 
     const surveyModel = new Survey.Model(this.json);
-    /*surveyModel.onAfterRenderQuestion.add((survey, options) => {
-      if (!options.question.popupdescription) { return; }
-
-      // Add a button;
-      const btn = document.createElement('button');
-      btn.className = 'btn btn-info btn-xs';
-      btn.innerHTML = 'More Info';
-      const question = options.question;
-      btn.onclick = function () {
-        // showDescription(question);
-        alert(options.question.popupdescription);
-      };
-      const header = options.htmlElement.querySelector('h5');
-      const span = document.createElement('span');
-      span.innerHTML = '  ';
-      header.appendChild(span);
-      header.appendChild(btn);
-    });*/
-    surveyModel.onComplete
+        surveyModel.onComplete
       .add(result =>
         this.submitSurvey.emit(result.data)
       );

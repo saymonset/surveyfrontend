@@ -1,7 +1,21 @@
 <!-- -->
 <!---->
 
-<div *ngIf="surveyDTO.json">
-  <survey [json]="surveyDTO.json" (submitSurvey)="sendData($event)"></survey>
-   </div>
-<div id="surveyResult"></div>
+
+<div class="widget stacked">
+
+  <div class="widget-header">
+    <i class="icon-signal"></i>
+    <h3>Encuesta</h3>
+  </div> <!-- /widget-header -->
+
+  <div class="widget-content">
+
+    <div *ngIf="surveyDTO.json">
+      <survey id="surveyContainer" class="survey-container contentcontainer codecontainer" [json]="surveyDTO.json" (submitSurvey)="sendData($event)"></survey>
+    </div>
+    <div id="surveyResult"></div>
+
+  </div> <!-- /widget-content -->
+
+</div> <!-- /widget -->

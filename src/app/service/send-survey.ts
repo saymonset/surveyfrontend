@@ -7,7 +7,7 @@ import { SurveyDTO } from '../dto/SurveyDTO';
 export class SendSurveyService {
 
   apiUrl = 'http://localhost:8443/survey/send';
-  apiUrlSent = "http://localhost:8443/survey/sent?";
+  apiUrlSent = "http://localhost:8443/survey/searchSurvey?";
   apiUrlSentResult = "http://localhost:8443/survey/sent/result";
   constructor(private http: HttpClient) { }
 
