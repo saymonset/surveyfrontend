@@ -5,8 +5,9 @@ import { AuthService } from './auth.service';
 import { TreeService } from './tree.service';
 import { FileUploadService } from './file-upload.service';
 import {SendSurveyService } from './send-survey';
+import { ChartService } from './chart.service';
 @NgModule({
   imports: [HttpClientModule],
-  providers: [UserService, AuthService, TreeService, FileUploadService, SendSurveyService]
+  providers: [UserService, AuthService, TreeService, FileUploadService, SendSurveyService, ChartService]
 })
 export class ServicesModule { }

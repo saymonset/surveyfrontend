@@ -5,7 +5,7 @@
     <h3>Chart</h3>
   </div> <!-- /widget-header -->
 
-  <div class="widget-content">
+  <div class="widget-content" *ngIf="chartOptions != null">>
 
     <highcharts-chart
       [Highcharts]="Highcharts"
