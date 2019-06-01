@@ -52,12 +52,13 @@ export class CuadrantChartComponent implements OnInit {
         console.log('-------------------2---------------------------');
       //  this.Highcharts: typeof Highcharts = Highcharts;
         console.log('-------------------3---------------------------');
-        this.chartOptions= {
+        this.chartOptions=  this.options;
+        /*{
           series: [{
             data: [1, 2, 3],
             type: 'line'
           }]
-        };
+        };*/
         console.log('-------------------4---------------------------');
         this.loading = false;
         console.log(this.chartOptions==null);
