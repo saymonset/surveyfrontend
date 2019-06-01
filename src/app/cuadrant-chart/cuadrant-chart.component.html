@@ -2,10 +2,10 @@
 
   <div class="widget-header">
     <i class="icon-signal"></i>
-    <h3>Chart</h3>
+    <h3>Chart {{loading}}</h3>
   </div> <!-- /widget-header -->
 
-  <div class="widget-content" *ngIf="chartOptions != null">>
+  <div class="widget-content" *ngIf="!loading && chartOptions">
 
     <highcharts-chart
       [Highcharts]="Highcharts"

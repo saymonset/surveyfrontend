@@ -4,6 +4,7 @@ import { NpsChartDTO } from '../dto/NpsChartDTO';
 import { ChartService } from '../service/chart.service';
 import { FilterCHARTDTO } from '../dto/FilterCHARTDTO';
 import { ChartCHARTDTO } from '../dto/ChartCHARTDTO';
+import {isUndefined} from "util";
 
 @Component({
   selector: 'app-cuadrant-chart',
@@ -21,7 +22,9 @@ export class CuadrantChartComponent implements OnInit {
   x2: [string, number] = ['promotores',19];
   x3: [string, number] = ['pasivos',20];
 
-  //chartOptions: any;
+  loading = true;
+  Highcharts:  typeof Highcharts = Highcharts;
+  chartOptions:  Highcharts.Options;
 
   constructor(private chartService: ChartService) {
 
@@ -42,21 +45,39 @@ export class CuadrantChartComponent implements OnInit {
       this.npsChartDTO.series[0].data[2] = ['fino',30];
       this.options = this.npsChartDTO;
 
-      console.log('SomonQQs = '+JSON.stringify(this.options));
-
-    });
+     /* this.Highcharts = Highcharts;
+      this.chartOptions = this.options;*/
+        console.log('-------------------1---------------------------');
+     console.log(this.chartOptions==null);
+        console.log('-------------------2---------------------------');
+      //  this.Highcharts: typeof Highcharts = Highcharts;
+        console.log('-------------------3---------------------------');
+        this.chartOptions= {
+          series: [{
+            data: [1, 2, 3],
+            type: 'line'
+          }]
+        };
+        console.log('-------------------4---------------------------');
+        this.loading = false;
+        console.log(this.chartOptions==null);
+        console.log('-------------------2---------------------------');
+    },
+      () => { });
 
   }
   ngOnInit() {
 
 
 
-
-
   }
-  Highcharts: typeof Highcharts = Highcharts;
- // chartOptions = new Highcharts.Chart(this.options);
+  /*Highcharts: typeof Highcharts = Highcharts;
   chartOptions: Highcharts.Options = {
+    series: [{
+      data: [1, 2, 3],
+      type: 'line'
+    }]*/
+ /* chartOptions: Highcharts.Options = {
 
     "chart": {
       "plotBackgroundColor": null,
@@ -104,7 +125,7 @@ export class CuadrantChartComponent implements OnInit {
         ]
       }
     ]
-  };
+  };*/
 
 
   /*chartOptions: Highcharts.Options = {
