@@ -1,9 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import * as Highcharts from 'highcharts';
 import { NpsChartDTO } from '../dto/NpsChartDTO';
 import { ChartService } from '../service/chart.service';
 import { FilterCHARTDTO } from '../dto/FilterCHARTDTO';
 import { ChartCHARTDTO } from '../dto/ChartCHARTDTO';
+import { SHARED_FILTER_STATE, ShareFilterState } from '../share-filter-state/share-filter-state.model';
+import { SHARED_FILTER_DATE_END, ShareFilterDateEnd } from '../share-filter-state/ShareFilterDateEnd';
+import { SHARED_FILTER_TERRITORIAL_NODE, ShareFilterTerritorialNode } from '../share-filter-state/ShareFilterTerritorialNode';
+import { SHARED_FILTER_SERVICIO_NODE, ShareFilterServicioNode } from '../share-filter-state/ShareFilterServicioNode';
+import { Observable } from 'rxjs';
 import {isUndefined} from "util";
 
 @Component({
@@ -17,22 +22,48 @@ export class CuadrantChartComponent implements OnInit {
   filterCHARTDTO: FilterCHARTDTO = new  FilterCHARTDTO();
   chartCHARTDTO: ChartCHARTDTO = new ChartCHARTDTO();
   error: string;
-  check:String;
+  check: String;
   loading = true;
   Highcharts:  typeof Highcharts = Highcharts;
   chartOptions:  Highcharts.Options;
 
-  constructor(private chartService: ChartService) {
+  constructor(private chartService: ChartService, @Inject(SHARED_FILTER_STATE) private stateEvents: Observable<ShareFilterState>
+    , @Inject(SHARED_FILTER_DATE_END) private dateEndEvents: Observable<ShareFilterDateEnd>,
+              @Inject(SHARED_FILTER_TERRITORIAL_NODE) private territorialNodeEvents: Observable<ShareFilterTerritorialNode>,
+              @Inject(SHARED_FILTER_SERVICIO_NODE) private servicioNodeEvents: Observable<ShareFilterServicioNode>) {
 
     this.filterCHARTDTO = new FilterCHARTDTO();
     this.filterCHARTDTO.territorialNode = 'territorialNode';
     this.filterCHARTDTO.servicioNode = 'servicioNode';
     this.filterCHARTDTO.dateBegin = new Date;
     this.filterCHARTDTO.dateEnd = new Date;
-    /*this.chartService.chart2(this.filterCHARTDTO).subscribe(
-     (res) => this.chartCHARTDTO = res,
-     (err) => this.error = err
-     );*/
+    stateEvents.subscribe((update) => {
+     console.log('ObservandodateBegin= ' + update.dateBegin);
+      if (update.dateBegin != undefined) {
+        this.filterCHARTDTO.dateBegin = update.dateBegin;
+      }
+    });
+
+    dateEndEvents.subscribe((update) => {
+       console.log('Observando dateEnd =' + update.dateEnd);
+      if (update.dateEnd != undefined) {
+        this.filterCHARTDTO.dateBegin = update.dateEnd;
+      }
+    });
+
+    territorialNodeEvents.subscribe((update) => {
+      console.log('Observando territorialNode =' + update.node);
+      if (update.node != undefined) {
+        this.filterCHARTDTO.territorialNode = update.node;
+      }
+    });
+
+    servicioNodeEvents.subscribe((update) => {
+      console.log('Observando servicioNodeEvents =' + update.node);
+      if (update.node != undefined) {
+        this.filterCHARTDTO.servicioNode = update.node;
+      }
+    });
 
     this.chartService.chart(this.filterCHARTDTO).subscribe(data => {
       this.npsChartDTO = data;
@@ -58,18 +89,8 @@ export class CuadrantChartComponent implements OnInit {
         num = splitted[1].replace(/re/gi,"");
         this.npsChartDTO.series[0].data[2] = [cad, parseFloat(num)];
 
-      this.options = this.npsChartDTO;
-
-     /* this.Highcharts = Highcharts;
-      this.chartOptions = this.options;*/
-      //  this.Highcharts: typeof Highcharts = Highcharts;
+        this.options = this.npsChartDTO;
         this.chartOptions=  this.options;
-        /*{
-          series: [{
-            data: [1, 2, 3],
-            type: 'line'
-          }]
-        };*/
         this.loading = false;
     },
       () => { });

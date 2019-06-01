@@ -33,7 +33,15 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { SearchComponent } from '../search/search.component';
 import { UploadsComponent } from '../uploads/uploads.component';
 import { SendSurveyComponent } from '../send-survey/send-survey.component';
+import { NpsMainChartComponent } from '../nps-main-chart/nps-main-chart.component';
 
+
+import { SHARED_FILTER_STATE, ShareFilterState } from '../share-filter-state/share-filter-state.model';
+import { SHARED_FILTER_DATE_END, ShareFilterDateEnd } from '../share-filter-state/ShareFilterDateEnd';
+import { SHARED_FILTER_SERVICIO_NODE, ShareFilterServicioNode } from '../share-filter-state/ShareFilterServicioNode';
+import { SHARED_FILTER_TERRITORIAL_NODE, ShareFilterTerritorialNode } from '../share-filter-state/ShareFilterTerritorialNode';
+
+import { Subject } from 'rxjs';
 @NgModule({
   imports: [HttpClientModule, ReactiveFormsModule , BrowserModule, FormsModule, RouterModule, ServicesModule, MessageModule, HighchartsChartModule,
     TreeModule, BrowserAnimationsModule, IgxCalendarModule, IgxDatePickerModule, IgxExpansionPanelModule,
@@ -42,7 +50,11 @@ import { SendSurveyComponent } from '../send-survey/send-survey.component';
       useFactory: adapterFactory
     })
   ],
-  providers: [UserDTO, TokenDTO, TreeModelTerritorialDTO],
+  providers: [UserDTO, TokenDTO, TreeModelTerritorialDTO,
+    [{ provide: SHARED_FILTER_STATE, useValue: new Subject<ShareFilterState>() }],
+    [{ provide: SHARED_FILTER_DATE_END, useValue: new Subject<ShareFilterDateEnd>() }],
+    [{ provide: SHARED_FILTER_SERVICIO_NODE, useValue: new Subject<ShareFilterServicioNode>() }],
+    [{ provide: SHARED_FILTER_TERRITORIAL_NODE, useValue: new Subject<ShareFilterTerritorialNode>() }]],
   declarations: [UploadsComponent, LoginComponent,
     DivisionServicioComponent,
     DivisionTerritorialComponent,
@@ -60,7 +72,8 @@ import { SendSurveyComponent } from '../send-survey/send-survey.component';
     SignUpComponent,
     CalendarComponent,
     SearchComponent,
-    SendSurveyComponent
+    SendSurveyComponent,
+    NpsMainChartComponent
     ],
   exports: [LoginComponent, HeadComponent, UploadsComponent, SendSurveyComponent]
 })
