@@ -17,11 +17,7 @@ export class CuadrantChartComponent implements OnInit {
   filterCHARTDTO: FilterCHARTDTO = new  FilterCHARTDTO();
   chartCHARTDTO: ChartCHARTDTO = new ChartCHARTDTO();
   error: string;
- // values: object[] = [{'Detractores'},13];
-  x1: [string, number] = ['Detractores',13];
-  x2: [string, number] = ['promotores',19];
-  x3: [string, number] = ['pasivos',20];
-
+  check:String;
   loading = true;
   Highcharts:  typeof Highcharts = Highcharts;
   chartOptions:  Highcharts.Options;
@@ -40,18 +36,33 @@ export class CuadrantChartComponent implements OnInit {
 
     this.chartService.chart(this.filterCHARTDTO).subscribe(data => {
       this.npsChartDTO = data;
-      this.npsChartDTO.series[0].data[0] = ['hola',17];
-      this.npsChartDTO.series[0].data[1] = ['saymon',20];
-      this.npsChartDTO.series[0].data[2] = ['fino',30];
+
+        this.check = new String(this.npsChartDTO.series[0].data[0]);
+        let splitted = this.check.split(",");
+        let re = "'";
+        let cad = splitted[0].replace(/re/gi,"");
+        let num = splitted[1].replace(/re/gi,"");
+      this.npsChartDTO.series[0].data[0] = [cad, parseFloat(num)];
+
+        this.check = new String(this.npsChartDTO.series[0].data[1]);
+         splitted = this.check.split(",");
+         re = "'";
+         cad = splitted[0].replace(/re/gi,"");
+         num = splitted[1].replace(/re/gi,"");
+        this.npsChartDTO.series[0].data[1] = [cad, parseFloat(num)];
+
+        this.check = new String(this.npsChartDTO.series[0].data[2]);
+        splitted = this.check.split(",");
+        re = "'";
+        cad = splitted[0].replace(/re/gi,"");
+        num = splitted[1].replace(/re/gi,"");
+        this.npsChartDTO.series[0].data[2] = [cad, parseFloat(num)];
+
       this.options = this.npsChartDTO;
 
      /* this.Highcharts = Highcharts;
       this.chartOptions = this.options;*/
-        console.log('-------------------1---------------------------');
-     console.log(this.chartOptions==null);
-        console.log('-------------------2---------------------------');
       //  this.Highcharts: typeof Highcharts = Highcharts;
-        console.log('-------------------3---------------------------');
         this.chartOptions=  this.options;
         /*{
           series: [{
@@ -59,10 +70,7 @@ export class CuadrantChartComponent implements OnInit {
             type: 'line'
           }]
         };*/
-        console.log('-------------------4---------------------------');
         this.loading = false;
-        console.log(this.chartOptions==null);
-        console.log('-------------------2---------------------------');
     },
       () => { });
 
