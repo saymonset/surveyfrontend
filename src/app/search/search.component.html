@@ -21,7 +21,13 @@
       </div> <!-- /widget-header -->
       <div class="widget-content">
         <div class="shortcuts">
-          <span class="shortcut-label"><igx-date-picker locale="es-VE"  (ngModelChange)="clickDateBegin($event)" [(ngModel)]="dateBegin"></igx-date-picker></span>
+          <input type="text"
+                 placeholder="Datepicker"
+                 class="form-control"
+                 [(ngModel)]="dateBegin"
+                 (bsValueChange)="clickDateBegin($event)"
+                 [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
+                 bsDatepicker>
         </div> <!-- /shortcuts -->
 
       </div> <!-- /widget-content -->
@@ -36,7 +42,14 @@
       </div> <!-- /widget-header -->
       <div class="widget-content">
         <div class="shortcuts">
-          <span class="shortcut-label"><igx-date-picker locale="es-VE" (ngModelChange)="clickDateEnd($event)" [(ngModel)]="dateEnd"></igx-date-picker></span>
+          <!--<span class="shortcut-label"><igx-date-picker locale="es-VE" (ngModelChange)="clickDateEnd($event)" [(ngModel)]="dateEnd"></igx-date-picker></span>-->
+            <input type="text"
+                   placeholder="Datepicker"
+                   class="form-control"
+                   [(ngModel)]="dateEnd"
+                   (bsValueChange)="clickDateEnd($event)"
+                   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
+                   bsDatepicker>
         </div> <!-- /shortcuts -->
       </div> <!-- /widget-content -->
     </div> <!-- /widget -->

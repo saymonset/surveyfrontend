@@ -1,85 +1,130 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import * as Highcharts from 'highcharts';
-import { NpsChartDTO } from '../dto/NpsChartDTO';
+
+import { ChartRepository } from '../repository/chart.repository';
 import { ChartService } from '../service/chart.service';
+import { NpsChartDTO } from '../dto/NpsChartDTO';
 import { FilterCHARTDTO } from '../dto/FilterCHARTDTO';
 import { ChartCHARTDTO } from '../dto/ChartCHARTDTO';
 import { SHARED_FILTER_STATE, ShareFilterState } from '../share-filter-state/share-filter-state.model';
 import { SHARED_FILTER_DATE_END, ShareFilterDateEnd } from '../share-filter-state/ShareFilterDateEnd';
 import { SHARED_FILTER_TERRITORIAL_NODE, ShareFilterTerritorialNode } from '../share-filter-state/ShareFilterTerritorialNode';
 import { SHARED_FILTER_SERVICIO_NODE, ShareFilterServicioNode } from '../share-filter-state/ShareFilterServicioNode';
-import { Observable } from 'rxjs';
-import {isUndefined} from "util";
-
+import { SHARED_FILTER_EXECUTE, ShareFilterExecute } from '../share-filter-state/ShareFilterExecute';
+import { Observable, Observer } from 'rxjs';
+import {isUndefined} from 'util';
+import * as Highcharts from 'highcharts';
 @Component({
   selector: 'app-cuadrant-chart',
   templateUrl: './cuadrant-chart.component.html',
   styleUrls: ['./cuadrant-chart.component.css']
 })
 export class CuadrantChartComponent implements OnInit {
+  Highcharts:  typeof Highcharts = Highcharts;
+  chartOptions:  Highcharts.Options;
   npsChartDTO: NpsChartDTO = new NpsChartDTO();
-  options: object;
   filterCHARTDTO: FilterCHARTDTO = new  FilterCHARTDTO();
   chartCHARTDTO: ChartCHARTDTO = new ChartCHARTDTO();
   error: string;
   check: String;
   loading = true;
-  Highcharts:  typeof Highcharts = Highcharts;
-  chartOptions:  Highcharts.Options;
+  options: object;
 
-  constructor(private chartService: ChartService, @Inject(SHARED_FILTER_STATE) private stateEvents: Observable<ShareFilterState>
+  constructor( private chartRepository: ChartRepository, private chartService: ChartService, @Inject(SHARED_FILTER_STATE) private stateEvents: Observable<ShareFilterState>
     , @Inject(SHARED_FILTER_DATE_END) private dateEndEvents: Observable<ShareFilterDateEnd>,
               @Inject(SHARED_FILTER_TERRITORIAL_NODE) private territorialNodeEvents: Observable<ShareFilterTerritorialNode>,
-              @Inject(SHARED_FILTER_SERVICIO_NODE) private servicioNodeEvents: Observable<ShareFilterServicioNode>) {
+              @Inject(SHARED_FILTER_SERVICIO_NODE) private servicioNodeEvents: Observable<ShareFilterServicioNode>,
+               @Inject(SHARED_FILTER_EXECUTE) private executeEvents: Observable<ShareFilterExecute>,
+               @Inject(SHARED_FILTER_EXECUTE) private executeObserverEvents: Observer<ShareFilterExecute>) {
 
-    this.filterCHARTDTO = new FilterCHARTDTO();
-    this.filterCHARTDTO.territorialNode = 'territorialNode';
-    this.filterCHARTDTO.servicioNode = 'servicioNode';
-    this.filterCHARTDTO.dateBegin = new Date;
-    this.filterCHARTDTO.dateEnd = new Date;
+
     stateEvents.subscribe((update) => {
-     console.log('ObservandodateBegin= ' + update.dateBegin);
+   //
       if (update.dateBegin != undefined) {
+       // console.log('ObservandodateBegin= ' + update.dateBegin);
         this.filterCHARTDTO.dateBegin = update.dateBegin;
+        this.executeObserverEvents.next(new ShareFilterExecute('1'));
       }
     });
 
     dateEndEvents.subscribe((update) => {
-       console.log('Observando dateEnd =' + update.dateEnd);
+      // console.log('Observando dateEnd =' + update.dateEnd);
       if (update.dateEnd != undefined) {
         this.filterCHARTDTO.dateBegin = update.dateEnd;
+        this.executeObserverEvents.next(new ShareFilterExecute('2'));
       }
     });
 
     territorialNodeEvents.subscribe((update) => {
-      console.log('Observando territorialNode =' + update.node);
+    //  console.log('Observando territorialNode =' + update.node);
       if (update.node != undefined) {
         this.filterCHARTDTO.territorialNode = update.node;
+        this.executeObserverEvents.next(new ShareFilterExecute('3'));
       }
     });
 
     servicioNodeEvents.subscribe((update) => {
-      console.log('Observando servicioNodeEvents =' + update.node);
+     // console.log('Observando servicioNodeEvents =' + update.node);
       if (update.node != undefined) {
         this.filterCHARTDTO.servicioNode = update.node;
+        this.executeObserverEvents.next(new ShareFilterExecute('4'));
       }
     });
 
-    this.chartService.chart(this.filterCHARTDTO).subscribe(data => {
-      this.npsChartDTO = data;
+
+    executeEvents.subscribe((update) => {
+      //console.log(' ejecuta isExecute =' + update.isExecute);
+      if (update.isExecute === '1' || update.isExecute === '2'|| update.isExecute === '3'|| update.isExecute === '4') {
+        console.log(' true ejecuta isExecute =' + update.isExecute);
+        this.chartService.chart(this.filterCHARTDTO).subscribe(data => {
+            this.npsChartDTO = data;
+            this.check = new String(this.npsChartDTO.series[0].data[0]);
+            let splitted = this.check.split(",");
+            let re = "'";
+            let cad = splitted[0].replace(/re/gi,"");
+            let num = splitted[1].replace(/re/gi,"");
+            this.npsChartDTO.series[0].data[0] = [cad, parseFloat(num)];
+
+            this.check = new String(this.npsChartDTO.series[0].data[1]);
+            splitted = this.check.split(",");
+            re = "'";
+            cad = splitted[0].replace(/re/gi,"");
+            num = splitted[1].replace(/re/gi,"");
+            this.npsChartDTO.series[0].data[1] = [cad, parseFloat(num)];
+
+            this.check = new String(this.npsChartDTO.series[0].data[2]);
+            splitted = this.check.split(",");
+            re = "'";
+            cad = splitted[0].replace(/re/gi,"");
+            num = splitted[1].replace(/re/gi,"");
+            this.npsChartDTO.series[0].data[2] = [cad, parseFloat(num)];
+
+            this.options = this.npsChartDTO;
+            this.chartOptions=  this.options;
+            this.loading = false;
+          },
+          () => { });
+       this.executeObserverEvents.next(new ShareFilterExecute('0'));
+      }
+    });
+
+
+  }
+  /* this.chartRepository.chart(this.filterCHARTDTO).subscribe(data => {
+        this.npsChartDTO = data;
+
 
         this.check = new String(this.npsChartDTO.series[0].data[0]);
         let splitted = this.check.split(",");
         let re = "'";
         let cad = splitted[0].replace(/re/gi,"");
         let num = splitted[1].replace(/re/gi,"");
-      this.npsChartDTO.series[0].data[0] = [cad, parseFloat(num)];
+        this.npsChartDTO.series[0].data[0] = [cad, parseFloat(num)];
 
         this.check = new String(this.npsChartDTO.series[0].data[1]);
-         splitted = this.check.split(",");
-         re = "'";
-         cad = splitted[0].replace(/re/gi,"");
-         num = splitted[1].replace(/re/gi,"");
+        splitted = this.check.split(",");
+        re = "'";
+        cad = splitted[0].replace(/re/gi,"");
+        num = splitted[1].replace(/re/gi,"");
         this.npsChartDTO.series[0].data[1] = [cad, parseFloat(num)];
 
         this.check = new String(this.npsChartDTO.series[0].data[2]);
@@ -92,10 +137,13 @@ export class CuadrantChartComponent implements OnInit {
         this.options = this.npsChartDTO;
         this.chartOptions=  this.options;
         this.loading = false;
-    },
+      },
       () => { });
 
-  }
+   // this.chartOptions = this.chartService.chart(this.filterCHARTDTO) ;
+    console.log('saymons = ' + this.chartOptions);
+
+  }*/
   ngOnInit() {
 
 
