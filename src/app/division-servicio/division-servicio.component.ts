@@ -17,7 +17,7 @@ export class DivisionServicioComponent implements OnInit {
   ngOnInit() {
     this.treeService.getTreeServicio()
       .subscribe(response => {
-        console.log();
+      //  console.log();
         //   alert(response[0]);
         this.tree = response[0] as TreeModel;
       });

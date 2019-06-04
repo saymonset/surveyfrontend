@@ -20,7 +20,7 @@ export class ChartRepository {
   }
 
   chart(filterCHARTDTO: FilterCHARTDTO): Observable<NpsChartDTO> {
-    return  this.http.post<NpsChartDTO>(this.baseUrl + 'chart/nps', filterCHARTDTO);
+    return  this.http.post<NpsChartDTO>(this.baseUrl + 'search/nps', filterCHARTDTO);
   }
 
 

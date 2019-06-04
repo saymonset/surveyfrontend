@@ -2,23 +2,71 @@
 <div class="row">
   <div class="col-md-6 col-xs-12">
 
-    <app-division-territorial></app-division-territorial>
+
+    <h2>Small Modal</h2>
+    <!-- Trigger the modal with a button -->
+    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Small Modal</button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Modal Header</h4>
+          </div>
+          <div class="modal-body">
+            <p> <p><strong><app-division-territorial></app-division-territorial></strong></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
 
 
 
   </div>
   <div class="col-md-6">
+    <div class="alert alert-warning">
 
-    <app-division-servicio></app-division-servicio>
+      <h2>Small Modal</h2>
+      <!-- Trigger the modal with a button -->
+      <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal1">Open Small Modal</button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="myModal1" role="dialog">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Modal Header</h4>
+            </div>
+            <div class="modal-body">
+              <p> <p><strong> <app-division-servicio></app-division-servicio></strong></p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
 
 
   </div>
-  <div class="col-md-6 col-xs-12">
+  <!--<div class="col-md-6 col-xs-12">
     <div class="widget stacked">
       <div class="widget-header">
         <i class="icon-search"></i>
         <h3>Desde</h3>
-      </div> <!-- /widget-header -->
+      </div> &lt;!&ndash; /widget-header &ndash;&gt;
       <div class="widget-content">
         <div class="shortcuts">
           <input type="text"
@@ -28,10 +76,10 @@
                  (bsValueChange)="clickDateBegin($event)"
                  [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
                  bsDatepicker>
-        </div> <!-- /shortcuts -->
+        </div> &lt;!&ndash; /shortcuts &ndash;&gt;
 
-      </div> <!-- /widget-content -->
-    </div> <!-- /widget -->
+      </div> &lt;!&ndash; /widget-content &ndash;&gt;
+    </div> &lt;!&ndash; /widget &ndash;&gt;
 
   </div>
   <div class="col-md-6">
@@ -39,10 +87,10 @@
       <div class="widget-header">
         <i class="icon-search"></i>
         <h3>Hasta</h3>
-      </div> <!-- /widget-header -->
+      </div> &lt;!&ndash; /widget-header &ndash;&gt;
       <div class="widget-content">
         <div class="shortcuts">
-          <!--<span class="shortcut-label"><igx-date-picker locale="es-VE" (ngModelChange)="clickDateEnd($event)" [(ngModel)]="dateEnd"></igx-date-picker></span>-->
+          &lt;!&ndash;<span class="shortcut-label"><igx-date-picker locale="es-VE" (ngModelChange)="clickDateEnd($event)" [(ngModel)]="dateEnd"></igx-date-picker></span>&ndash;&gt;
             <input type="text"
                    placeholder="Datepicker"
                    class="form-control"
@@ -50,10 +98,10 @@
                    (bsValueChange)="clickDateEnd($event)"
                    [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
                    bsDatepicker>
-        </div> <!-- /shortcuts -->
-      </div> <!-- /widget-content -->
-    </div> <!-- /widget -->
-  </div>
+        </div> &lt;!&ndash; /shortcuts &ndash;&gt;
+      </div> &lt;!&ndash; /widget-content &ndash;&gt;
+    </div> &lt;!&ndash; /widget &ndash;&gt;
+  </div>-->
 
 </div>
 

@@ -38,13 +38,41 @@
             </ul>
           </li>
 
-         <!-- <li class="dropdown">
-            <a href="#" routerLink="/login">
+          <li>
 
-              <i class="glyphicon glyphicon-search"></i>
-              <span>Salir</span>
-            </a>
-          </li>-->
+
+              <i class="icon-search"></i>
+              <span>Desde</span>
+            <input type="text"
+                   placeholder="Datepicker"
+                   class="form-control"
+                   [(ngModel)]="dateBegin"
+                   (bsValueChange)="clickDateBegin($event)"
+                   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
+                   bsDatepicker>
+          </li>
+          <li>
+              <i class="icon-search"></i>
+              <span>Hasta</span>
+            <input type="text"
+                   placeholder="Datepicker"
+                   class="form-control"
+                   [(ngModel)]="dateEnd"
+                   (bsValueChange)="clickDateEnd($event)"
+                   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
+                   bsDatepicker>
+          </li>
+
+
+
+
+          <!-- <li class="dropdown">
+             <a href="#" routerLink="/login">
+
+               <i class="glyphicon glyphicon-search"></i>
+               <span>Salir</span>
+             </a>
+           </li>-->
          <!-- <li class="dropdown">
             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
               <i class="icon-copy"></i>
@@ -85,6 +113,7 @@
           </li>-->
 
         </ul>
+
       </div> <!-- /.subnav-collapse -->
 
     </div> <!-- /container -->

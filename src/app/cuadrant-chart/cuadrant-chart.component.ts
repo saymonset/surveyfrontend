@@ -49,7 +49,7 @@ export class CuadrantChartComponent implements OnInit {
     dateEndEvents.subscribe((update) => {
       // console.log('Observando dateEnd =' + update.dateEnd);
       if (update.dateEnd != undefined) {
-        this.filterCHARTDTO.dateBegin = update.dateEnd;
+        this.filterCHARTDTO.dateEnd = update.dateEnd;
         this.executeObserverEvents.next(new ShareFilterExecute('2'));
       }
     });
@@ -72,7 +72,6 @@ export class CuadrantChartComponent implements OnInit {
 
 
     executeEvents.subscribe((update) => {
-      //console.log(' ejecuta isExecute =' + update.isExecute);
       if (update.isExecute === '1' || update.isExecute === '2'|| update.isExecute === '3'|| update.isExecute === '4') {
         console.log(' true ejecuta isExecute =' + update.isExecute);
         this.chartService.chart(this.filterCHARTDTO).subscribe(data => {
