@@ -13,7 +13,7 @@ export class ProductoInterceptorService implements HttpInterceptor {
     const token = this.tokenService.getToken();
     if (token != null) {
       //  autReq = req.clone({ headers: req.headers.set('AuthorizationBearer ' + token) });
-          autReq = req.clone({ headers: req.headers.set('AuthorizationBearer', token) })
+          autReq = req.clone({ headers: req.headers.set('AuthorizationBearer', token) });
      /* autReq = req.clone({
         setHeaders: {
           'AuthorizationBearer ' + token

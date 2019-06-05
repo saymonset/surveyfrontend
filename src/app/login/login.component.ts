@@ -43,8 +43,8 @@ export class LoginComponent implements OnInit {
         this.isLogged = true;
         this.isLoginFail = false;
         this.roles = this.tokenService.getAuthorities();
-       // window.location.reload();
-        this.router.navigateByUrl('/head');
+        window.location.reload();
+       //this.router.navigateByUrl('/home');
       },
       (err: any) => {
         this.isLogged = false;

@@ -1,0 +1,11 @@
+<li>
+  <i class="icon-search"></i>
+  <span>Hasta</span>
+  <input type="text"
+         placeholder="Datepicker"
+         class="form-control"
+         [(ngModel)]="dateEnd"
+         (bsValueChange)="clickDateEnd($event)"
+         [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
+         bsDatepicker>
+</li>

@@ -1,0 +1,119 @@
+<nav class="navbar navbar-inverse" role="navigation">
+
+  <div class="container" *ngIf="isLogin">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <i class="icon-cog"></i>
+      </button>
+      <a class="navbar-brand" href="#">
+        <p>{{ info.nombreUsuario}}</p>
+      </a>
+
+
+    </div>
+
+
+  </div> <!-- /.container -->
+</nav>
+
+
+
+
+
+<div class="subnavbar" >
+
+  <div class="subnavbar-inner">
+
+    <div class="container">
+
+      <a href="javascript:;" class="subnav-toggle" data-toggle="collapse" data-target=".subnav-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <i class="icon-reorder"></i>
+
+      </a>
+
+      <div class="collapse subnav-collapse">
+        <ul class="mainnav" *ngIf="isLogin">
+
+
+
+          <li class="active" >
+
+              <a href="javascript:;"  (click)="logOut()" class="dropdown-toggle" data-toggle="dropdown">
+                <i class="icon-home"></i>
+                <span>Cerrar Sesión</span>
+              </a>
+          </li>
+
+          <li class="dropdown">
+            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="icon-th"></i>
+              <span>Components</span>
+              <b class="caret"></b>
+            </a>
+
+            <ul class="dropdown-menu">
+              <li><a href="#" routerLink="/sendSurvey">Mandar Encuestas</a></li>
+
+            </ul>
+          </li>
+
+
+
+          <li>
+              <span><app-date-from></app-date-from></span>
+          </li>
+          <li>
+            <app-date-to></app-date-to>
+          </li>
+
+
+
+
+        </ul>
+      </div> <!-- /.subnav-collapse -->
+
+    </div> <!-- /container -->
+
+  </div> <!-- /subnavbar-inner -->
+
+</div> <!-- /subnavbar -->
+
+
+<div class="main">
+
+  <div class="container">
+    <div *ngIf="!isLogin">
+      <div class="row">
+        <div class="col-md-6 col-xs-12">
+          <app-login></app-login>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="isLogin">
+      <div class="row">
+        <div class="col-md-12 col-xs-12">
+          <app-search></app-search>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-6 col-xs-12">
+        <app-cuadrant-chart></app-cuadrant-chart>
+      </div>
+    </div>
+
+
+  </div> <!-- /container -->
+
+</div> <!-- /main -->
+
+
+
+
+

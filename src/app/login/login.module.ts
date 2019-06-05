@@ -42,8 +42,10 @@ import { SHARED_FILTER_SERVICIO_NODE, ShareFilterServicioNode } from '../share-f
 import { SHARED_FILTER_TERRITORIAL_NODE, ShareFilterTerritorialNode } from '../share-filter-state/ShareFilterTerritorialNode';
 import { SHARED_FILTER_EXECUTE, ShareFilterExecute } from '../share-filter-state/ShareFilterExecute';
 import { interceptorProvider } from '../interceptors/producto-interceptor.service';
-
+import { HomeComponent } from '../home/home.component';
 import { ChartRepository } from '../repository/chart.repository';
+import { DateFromComponent } from '../date-from/date-from.component';
+import { DateToComponent } from '../date-to/date-to.component';
 
 import { Subject } from 'rxjs';
 @NgModule({
@@ -79,8 +81,12 @@ import { Subject } from 'rxjs';
     CalendarComponent,
     SearchComponent,
     SendSurveyComponent,
-    NpsMainChartComponent
-    ],
+    NpsMainChartComponent,
+    HomeComponent,
+    DateFromComponent,
+    DateToComponent
+
+  ],
   exports: [LoginComponent, HeadComponent, UploadsComponent, SendSurveyComponent]
 })
 export class LoginModule {}

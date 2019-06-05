@@ -1,0 +1,11 @@
+<li>
+  <i class="icon-search"></i>
+  <span>Desde</span>
+  <input type="text"
+         placeholder="Datepicker"
+         class="form-control"
+         [(ngModel)]="dateBegin"
+         (bsValueChange)="clickDateBegin($event)"
+         [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
+         bsDatepicker>
+</li>

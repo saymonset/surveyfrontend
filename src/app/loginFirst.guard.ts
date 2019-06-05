@@ -4,6 +4,7 @@ import {
   Router
 } from "@angular/router";
 import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './home/home.component';
 @Injectable()
 export class LoginFirstGuard {
   private firstNavigation = true;
@@ -12,7 +13,7 @@ export class LoginFirstGuard {
               state: RouterStateSnapshot): boolean {
     if (this.firstNavigation) {
       this.firstNavigation = false;
-      if (route.component != LoginComponent) {
+      if (route.component != HomeComponent) {
         this.router.navigateByUrl("/");
         return false;
       }

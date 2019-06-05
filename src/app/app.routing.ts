@@ -8,13 +8,16 @@ import { SurveytestComponent } from './surveytest/surveytest.component';
 import { UploadsComponent } from './uploads/uploads.component';
 import { SendSurveyComponent } from './send-survey/send-survey.component';
 import { GuardService as guard} from './guards/guard.service';
+import { HomeComponent } from './home/home.component';
 const routes: Routes = [
   { path: 'sendSurvey', component: SendSurveyComponent, canActivate: [LoginFirstGuard] },
   { path: 'survey', component: SurveytestComponent },
   { path: 'head', component: HeadComponent, canActivate: [LoginFirstGuard] },
   { path: 'login', component: LoginComponent, canActivate: [LoginFirstGuard] },
-  { path: 'sig-in', component: SignUpComponent, canActivate: [LoginFirstGuard] },
-  { path: '**', redirectTo: '/login' }
+  { path: 'registro', component: SignUpComponent, canActivate: [LoginFirstGuard] },
+  {path: '', component: HomeComponent},
+  {path: 'home', component: HomeComponent},
+  {path: '**', redirectTo: 'home', pathMatch: 'full'}
 ]
 
 /*const routes: Routes = [

@@ -16,16 +16,16 @@ import { SurveytestComponent } from './surveytest/surveytest.component';
 
 
 
+
+
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
     SurveyComponent,
     SurveytestComponent
-
-
-
-
-
   ],
   imports: [
     BrowserModule,

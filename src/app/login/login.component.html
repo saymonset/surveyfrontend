@@ -1,5 +1,6 @@
 <div *ngIf="isLogged; else loggedOut">
-  Has iniciado sesión como: {{ roles }}
+
+  <a routerLink="/home"><button class="btn btn-primary float-right">  Has iniciado sesión como: {{ roles }}</button></a>
 </div>
 
 <ng-template #loggedOut>
