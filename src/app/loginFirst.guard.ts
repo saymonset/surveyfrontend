@@ -13,7 +13,7 @@ export class LoginFirstGuard {
               state: RouterStateSnapshot): boolean {
     if (this.firstNavigation) {
       this.firstNavigation = false;
-      if (route.component != HomeComponent) {
+      if (route.component != LoginComponent) {
         this.router.navigateByUrl("/");
         return false;
       }

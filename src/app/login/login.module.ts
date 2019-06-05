@@ -46,7 +46,7 @@ import { HomeComponent } from '../home/home.component';
 import { ChartRepository } from '../repository/chart.repository';
 import { DateFromComponent } from '../date-from/date-from.component';
 import { DateToComponent } from '../date-to/date-to.component';
-
+import { HomeSimpleComponent } from '../home-simple/home-simple.component';
 import { Subject } from 'rxjs';
 @NgModule({
   imports: [HttpClientModule, ReactiveFormsModule , BrowserModule, FormsModule, RouterModule, ServicesModule, MessageModule, HighchartsChartModule,
@@ -84,7 +84,8 @@ import { Subject } from 'rxjs';
     NpsMainChartComponent,
     HomeComponent,
     DateFromComponent,
-    DateToComponent
+    DateToComponent,
+    HomeSimpleComponent
 
   ],
   exports: [LoginComponent, HeadComponent, UploadsComponent, SendSurveyComponent]

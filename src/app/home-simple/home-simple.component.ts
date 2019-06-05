@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { TokenService } from '../service/token.service';
 import { Router } from '@angular/router';
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-home-simple',
+  templateUrl: './home-simple.component.html',
+  styleUrls: ['./home-simple.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeSimpleComponent implements OnInit {
   isLogin = false;
   roles: string[];
   authority: string;
