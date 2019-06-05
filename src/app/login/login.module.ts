@@ -41,6 +41,7 @@ import { SHARED_FILTER_DATE_END, ShareFilterDateEnd } from '../share-filter-stat
 import { SHARED_FILTER_SERVICIO_NODE, ShareFilterServicioNode } from '../share-filter-state/ShareFilterServicioNode';
 import { SHARED_FILTER_TERRITORIAL_NODE, ShareFilterTerritorialNode } from '../share-filter-state/ShareFilterTerritorialNode';
 import { SHARED_FILTER_EXECUTE, ShareFilterExecute } from '../share-filter-state/ShareFilterExecute';
+import { interceptorProvider } from '../interceptors/producto-interceptor.service';
 
 import { ChartRepository } from '../repository/chart.repository';
 
@@ -54,7 +55,7 @@ import { Subject } from 'rxjs';
       useFactory: adapterFactory
     })
   ],
-  providers: [UserDTO, TokenDTO, TreeModelTerritorialDTO, ChartRepository,
+  providers: [interceptorProvider, UserDTO, TokenDTO, TreeModelTerritorialDTO, ChartRepository,
     [{ provide: SHARED_FILTER_STATE, useValue: new Subject<ShareFilterState>() }],
     [{ provide: SHARED_FILTER_DATE_END, useValue: new Subject<ShareFilterDateEnd>() }],
     [{ provide: SHARED_FILTER_SERVICIO_NODE, useValue: new Subject<ShareFilterServicioNode>() }],

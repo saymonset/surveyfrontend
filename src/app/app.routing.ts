@@ -7,6 +7,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { SurveytestComponent } from './surveytest/surveytest.component';
 import { UploadsComponent } from './uploads/uploads.component';
 import { SendSurveyComponent } from './send-survey/send-survey.component';
+import { GuardService as guard} from './guards/guard.service';
 const routes: Routes = [
   { path: 'sendSurvey', component: SendSurveyComponent, canActivate: [LoginFirstGuard] },
   { path: 'survey', component: SurveytestComponent },
@@ -22,7 +23,13 @@ const routes: Routes = [
 ]*/
 export const routing = RouterModule.forRoot(routes);
 
-
+// productos: utilizamos canActivate
+/*{path: 'detalle/:id', component: DetalleProductoComponent,
+  canActivate: [guard], data: { expectedRol: ['admin', 'user']}},
+{path: 'nuevo', component: NuevoProductoComponent,
+  canActivate: [guard], data: { expectedRol: ['admin']}},
+{path: 'editar/:id', component: EditarProductoComponent,
+  canActivate: [guard], data: { expectedRol: ['admin']}},*/
 /**
  *
  * RouterModule.forRoot([

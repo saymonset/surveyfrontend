@@ -4,7 +4,7 @@ import { Observable, from, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { TreeModelTerritorialDTO } from '../dto/TreeModelTerritorialDTO';
 import { TreeModelServicioDTO } from '../dto/TreeModelServicioDTO';
-
+import { UserService } from '../service/user.service';
 import { map } from 'rxjs/operators';
 
 const PROTOCOL = 'http';
@@ -12,8 +12,7 @@ const PORT = 8443;
 @Injectable()
 export class TreeService {
   baseUrl: string;
-  auth_token: string;
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private userService: UserService) {
     this.baseUrl = `${PROTOCOL}://${location.hostname}:${PORT}/`;
   }
 
@@ -30,7 +29,7 @@ export class TreeService {
   private getOptions() {
     return {
       headers: new HttpHeaders({
-        "Authorization": `Bearer<${this.auth_token}>`
+        "Authorization": `Bearer<${this.userService.auth_token}>`
       })
     }
   }

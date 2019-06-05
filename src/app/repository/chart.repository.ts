@@ -5,6 +5,7 @@ import { catchError } from 'rxjs/operators';
 import { NpsChartDTO } from '../dto/NpsChartDTO';
 import { FilterCHARTDTO } from '../dto/FilterCHARTDTO';
 import { ChartCHARTDTO } from '../dto/ChartCHARTDTO';
+import { UserService } from '../service/user.service';
 
 import { map } from 'rxjs/operators';
 
@@ -15,12 +16,12 @@ const PORT = 8443;
 export class ChartRepository {
   baseUrl: string;
   auth_token: string;
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private  userService: UserService) {
     this.baseUrl = `${PROTOCOL}://${location.hostname}:${PORT}/`;
   }
 
   chart(filterCHARTDTO: FilterCHARTDTO): Observable<NpsChartDTO> {
-    return  this.http.post<NpsChartDTO>(this.baseUrl + 'search/nps', filterCHARTDTO);
+    return  this.http.post<NpsChartDTO>(this.baseUrl + 'search/nps', filterCHARTDTO, this.getOptions());
   }
 
 
@@ -28,18 +29,19 @@ export class ChartRepository {
 
 
 
-  private getOptions2() {
+  /*private getOptions2() {
     return {
       headers: new HttpHeaders({
-        'Accept': 'application/json, */*'
+        'Accept': 'application/json, *!/!*'
       })
     };
-  }
+  }*/
 
   private getOptions() {
     return {
       headers: new HttpHeaders({
-        'Authorization': `Bearer<${this.auth_token}>`
+        'Accept': 'application/json, */*',
+        'Authorization': `${this.userService.auth_token}`
       })
     };
   }

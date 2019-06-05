@@ -19,7 +19,7 @@ export class UserService {
 
 
   authenticate(userDTO: UserDTO): Observable<boolean> {
-    return this.http.post<any>(this.baseUrl + 'autenticate/user', userDTO, this.getOptions2())
+    return this.http.post<any>(this.baseUrl + 'autenticate/user', userDTO, this.getOptions())
       .pipe(catchError((error: Response) =>
         throwError(`Authentication Failed. Network Error: ${error.statusText} (${error.status})`)))
       .pipe(map(response => {
@@ -37,17 +37,19 @@ export class UserService {
 
 
 
-  private getOptions2() {
+ /* private getOptions2() {
     return {
       headers: new HttpHeaders({
-        'Accept': 'application/json, */*'
+        'Accept': 'application/json, *!/!*',
+        'Authorization': `Bearer<${this.auth_token}>`
       })
     };
-  }
+  }*/
 
   private getOptions() {
     return {
       headers: new HttpHeaders({
+        'Accept': 'application/json, */*',
         'Authorization': `Bearer<${this.auth_token}>`
       })
     };
