@@ -2,15 +2,17 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpEvent, HttpErrorResponse, HttpEventType} from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import {AppSettings} from '../dto/AppSettings ';
 @Injectable()
 export class FileUploadService {
 
-  apiUrl = 'http://localhost:8443/send/survey';
-
-  constructor(private http: HttpClient) { }
+  baseUrl: string;
+  constructor(private http: HttpClient) {
+    this.baseUrl = AppSettings.API_ENDPOINT + '/send/survey';
+  }
 
   upload(formData) {
-    return this.http.post<any>(`${this.apiUrl}`, formData, {
+    return this.http.post<any>(`${this.baseUrl}`, formData, {
       reportProgress: true,
       observe: 'events'
     }).pipe(map((event) => {

@@ -6,14 +6,14 @@ import { TreeModelTerritorialDTO } from '../dto/TreeModelTerritorialDTO';
 import { TreeModelServicioDTO } from '../dto/TreeModelServicioDTO';
 import { UserService } from '../service/user.service';
 import { map } from 'rxjs/operators';
-
-const PROTOCOL = 'http';
-const PORT = 8443;
+import {AppSettings} from '../dto/AppSettings ';
+/*const PROTOCOL = 'http';
+const PORT = 8443;*/
 @Injectable()
 export class TreeService {
   baseUrl: string;
   constructor(private http: HttpClient, private userService: UserService) {
-    this.baseUrl = `${PROTOCOL}://${location.hostname}:${PORT}/`;
+    this.baseUrl = AppSettings.API_ENDPOINT;
   }
 
   getTreeTerritorial(): Observable<TreeModelTerritorialDTO[]> {

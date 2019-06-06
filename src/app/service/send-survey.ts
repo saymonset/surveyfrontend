@@ -3,13 +3,19 @@ import { HttpClient, HttpEvent, HttpErrorResponse, HttpEventType} from '@angular
 import { throwError, Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { SurveyDTO } from '../dto/SurveyDTO';
+import {AppSettings} from '../dto/AppSettings ';
 @Injectable()
 export class SendSurveyService {
-
-  apiUrl = 'http://localhost:8443/survey/send';
-  apiUrlSent = "http://localhost:8443/survey/searchSurvey?";
-  apiUrlSentResult = "http://localhost:8443/survey/sent/result";
-  constructor(private http: HttpClient) { }
+  baseUrl: string;
+  apiUrl = ''; // http://localhost:8443/survey/send';
+  apiUrlSent = ''; // "http://localhost:8443/survey/searchSurvey?";
+  apiUrlSentResult = ''; // "http://localhost:8443/survey/sent/result";
+  constructor(private http: HttpClient) {
+    this.baseUrl = AppSettings.API_ENDPOINT;
+    this.apiUrl = this.baseUrl + 'survey/send';
+    this.apiUrlSent = this.baseUrl + 'survey/searchSurvey?';
+    this.apiUrlSentResult = this.baseUrl + 'survey/sent/result';
+  }
 
   send(formData) {
     return this.http.post<any>(`${this.apiUrl}`, formData, {

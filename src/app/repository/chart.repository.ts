@@ -6,18 +6,16 @@ import { NpsChartDTO } from '../dto/NpsChartDTO';
 import { FilterCHARTDTO } from '../dto/FilterCHARTDTO';
 import { ChartCHARTDTO } from '../dto/ChartCHARTDTO';
 import { UserService } from '../service/user.service';
-
+import {AppSettings} from '../dto/AppSettings ';
 import { map } from 'rxjs/operators';
 
 
-const PROTOCOL = 'http';
-const PORT = 8443;
 @Injectable()
 export class ChartRepository {
   baseUrl: string;
   auth_token: string;
   constructor(private http: HttpClient, private  userService: UserService) {
-    this.baseUrl = `${PROTOCOL}://${location.hostname}:${PORT}/`;
+    this.baseUrl = AppSettings.API_ENDPOINT;
   }
 
   chart(filterCHARTDTO: FilterCHARTDTO): Observable<NpsChartDTO> {
@@ -27,15 +25,6 @@ export class ChartRepository {
 
 
 
-
-
-  /*private getOptions2() {
-    return {
-      headers: new HttpHeaders({
-        'Accept': 'application/json, *!/!*'
-      })
-    };
-  }*/
 
   private getOptions() {
     return {

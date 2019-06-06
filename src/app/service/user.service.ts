@@ -4,17 +4,14 @@ import { Observable, from, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { UserDTO } from '../dto/UserDTO';
 import { map } from 'rxjs/operators';
-// import { Response } from '@angular/http';
-// import { TokenDTO } from '../dto/TokenDTO';
-
-const PROTOCOL = 'http';
-const PORT = 8443;
+import {AppSettings} from '../dto/AppSettings ';
 @Injectable()
 export class UserService {
   baseUrl: string;
   auth_token: string;
   constructor(private http: HttpClient) {
-    this.baseUrl = `${PROTOCOL}://${location.hostname}:${PORT}/`;
+    // this.baseUrl = `${PROTOCOL}://${location.hostname}:${PORT}/`;
+    this.baseUrl = AppSettings.API_ENDPOINT;
   }
 
 
@@ -34,18 +31,6 @@ export class UserService {
       userDTO, this.getOptions());
   }
 
-
-
-
- /* private getOptions2() {
-    return {
-      headers: new HttpHeaders({
-        'Accept': 'application/json, *!/!*',
-        'Authorization': `Bearer<${this.auth_token}>`
-      })
-    };
-  }*/
-
   private getOptions() {
     return {
       headers: new HttpHeaders({
@@ -54,12 +39,5 @@ export class UserService {
       })
     };
   }
-/*  private sendAutenticateRequest<T>(verb: string, url: string, body?: UserDTO)
-  : Observable<T> {
-    const myHeaders = this.getOptions;
-    return this.http.request<T>(verb, url, {
-      body: body,
-      headers: myHeaders
-    });
-  }*/
+
 }
