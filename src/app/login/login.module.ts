@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule, ReactiveFormsModule  } from "@angular/forms";
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { ServicesModule } from "../service/services.module"
 import { LoginComponent } from './login.component';
 import { RouterModule } from "@angular/router";
@@ -25,7 +25,6 @@ import { HighchartsChartModule } from 'highcharts-angular';
 import { DivisionTerritorialComponent } from '../division-territorial/division-territorial.component';
 import { DivisionServicioComponent } from '../division-servicio/division-servicio.component';
 import { TreeModule } from 'ng2-tree';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IgxCalendarModule, IgxDatePickerModule, IgxExpansionPanelModule   } from 'igniteui-angular';
 import { CalendarComponent } from '../calendar/calendar.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
@@ -48,16 +47,28 @@ import { DateFromComponent } from '../date-from/date-from.component';
 import { DateToComponent } from '../date-to/date-to.component';
 import { HomeSimpleComponent } from '../home-simple/home-simple.component';
 import { Subject } from 'rxjs';
+import { LoaderComponent } from '../loader/loader.component';
+import { LoaderService } from '../loader.service';
+import { LoaderInterceptor } from '../loader.interceptor';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatProgressBarModule, MatRadioModule, MatSliderModule} from '@angular/material';
+import { HeadImageComponent } from '../head-image/head-image.component';
 @NgModule({
-  imports: [HttpClientModule, ReactiveFormsModule , BrowserModule, FormsModule, RouterModule, ServicesModule, MessageModule, HighchartsChartModule,
-    TreeModule, BrowserAnimationsModule, IgxCalendarModule, IgxDatePickerModule, IgxExpansionPanelModule,
+  imports: [
+    BrowserAnimationsModule,
+    MatProgressSpinnerModule,
+    MatProgressBarModule, MatRadioModule, MatSliderModule,
+    HttpClientModule,   ReactiveFormsModule , BrowserModule, FormsModule, RouterModule, ServicesModule, MessageModule, HighchartsChartModule,
+    TreeModule, IgxCalendarModule, IgxDatePickerModule, IgxExpansionPanelModule,
     BsDatepickerModule.forRoot(),
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory
     })
   ],
-  providers: [interceptorProvider, UserDTO, TokenDTO, TreeModelTerritorialDTO, ChartRepository,
+  providers: [LoaderService, interceptorProvider, UserDTO, TokenDTO, TreeModelTerritorialDTO, ChartRepository,
+     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
     [{ provide: SHARED_FILTER_STATE, useValue: new Subject<ShareFilterState>() }],
     [{ provide: SHARED_FILTER_DATE_END, useValue: new Subject<ShareFilterDateEnd>() }],
     [{ provide: SHARED_FILTER_SERVICIO_NODE, useValue: new Subject<ShareFilterServicioNode>() }],
@@ -85,7 +96,9 @@ import { Subject } from 'rxjs';
     HomeComponent,
     DateFromComponent,
     DateToComponent,
-    HomeSimpleComponent
+    HomeSimpleComponent,
+    LoaderComponent,
+    HeadImageComponent
 
   ],
   exports: [LoginComponent, HeadComponent, UploadsComponent, SendSurveyComponent]

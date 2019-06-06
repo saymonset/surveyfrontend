@@ -11,8 +11,12 @@ export class HomeComponent implements OnInit {
   roles: string[];
   authority: string;
   info: any = {};
-  constructor(private tokenService: TokenService, private router: Router) { }
+
+  constructor(private tokenService: TokenService, private router: Router) {
+
+  }
   ngOnInit() {
+
     if (this.tokenService.getToken()) {
       this.info = {
         nombreUsuario: this.tokenService.getUserName(),

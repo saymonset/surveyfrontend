@@ -1,0 +1,37 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col bg-light text-white">
+      <img src="assets/img/logo.jpg">
+
+      <div class="float-right">
+        <small>
+          <span *ngIf="isLogin" class="text-dark">
+
+
+            <li class="dropdown">
+						<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+							<i class="icon-th"></i>
+							<span> {{ info.nombreUsuario}}</span>
+							<b class="caret"></b>
+						</a>
+
+						<ul class="dropdown-menu">
+
+							<li><a href="javascript:;"  (click)="logOut()">
+                      <i class="icon-home"></i>
+                      <span>Cerrar Sesión</span>
+                  </a>
+              </li>
+              <li class="divider"></li>
+              <li><a href="#">Acerca de..</a></li>
+
+						</ul>
+					</li>
+
+          </span>
+        </small>
+      </div>
+
+    </div>
+  </div>
+</div>

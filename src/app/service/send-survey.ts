@@ -31,8 +31,8 @@ export class SendSurveyService {
     );
   }
 
-  sentVerify(codigoEncuesta, email, lang): Observable<SurveyDTO> {
-    return  this.http.get<SurveyDTO>(this.apiUrlSent + "codigoEncuesta="+codigoEncuesta+"&email="+email+"&lang=" + lang);
+  sentVerify(codigoEncuesta, email, lang, codeCompany): Observable<SurveyDTO> {
+    return  this.http.get<SurveyDTO>(this.apiUrlSent + "codigoEncuesta="+codigoEncuesta+"&email="+email+"&lang=" + lang + "&codeCompany=" + codeCompany);
   }
 
   sentResult(objecto: object): Observable<SurveyDTO> {

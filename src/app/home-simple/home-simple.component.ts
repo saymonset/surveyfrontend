@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TokenService } from '../service/token.service';
 import { Router } from '@angular/router';
+import { LoaderService } from '../loader.service';
 @Component({
   selector: 'app-home-simple',
   templateUrl: './home-simple.component.html',
@@ -11,8 +12,14 @@ export class HomeSimpleComponent implements OnInit {
   roles: string[];
   authority: string;
   isSendSurvey = false;
+  loading: boolean;
   info: any = {};
-  constructor(private tokenService: TokenService, private router: Router) { }
+  constructor(private tokenService: TokenService, private router: Router, private loaderService: LoaderService) {
+    this.loaderService.isLoading.subscribe((v) => {
+      console.log(v);
+      this.loading = v;
+    }); }
+
   ngOnInit() {
     if (this.tokenService.getToken()) {
       this.info = {
@@ -34,6 +41,7 @@ export class HomeSimpleComponent implements OnInit {
 
   sendSurvey(): void {
    this.isSendSurvey = true;
+   this.loading = false;
   }
 
 
