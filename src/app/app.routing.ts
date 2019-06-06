@@ -10,6 +10,8 @@ import { SendSurveyComponent } from './send-survey/send-survey.component';
 import { GuardService as guard} from './guards/guard.service';
 import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { HomeSimpleComponent } from './home-simple/home-simple.component';
+
 
 const routes: Routes = [
   { path: 'sendSurvey', component: SendSurveyComponent , canActivate: [LoginFirstGuard]},
@@ -18,6 +20,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [LoginFirstGuard] },
   { path: 'registro', component: SignUpComponent, canActivate: [LoginFirstGuard] },
   { path: 'dashboard', component: DashboardComponent , canActivate: [LoginFirstGuard]},
+  { path: 'homeSimple', component: HomeSimpleComponent, canActivate: [LoginFirstGuard] },
 
   {path: '', component: LoginComponent},
   {path: 'login', component: LoginComponent},

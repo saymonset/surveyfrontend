@@ -9,20 +9,11 @@
 
       <div class="collapse subnav-collapse">
         <ul class="mainnav" *ngIf="isLogin">
-          <li class="dropdown">
-            <a routerLink="/login">
-              <i class="icon-cog"></i>
-              <span>{{ info.nombreUsuario}}</span>
-              <b class="caret"></b>
-            </a>
-
-          </li>
-
 
           <li class="active" >
-            <a href="javascript:;"  (click)="logOut()" class="dropdown-toggle" data-toggle="dropdown">
+            <a routerLink="/login" >
               <i class="icon-home"></i>
-              <span>Cerrar Sesión</span>
+              <span>Inicio</span>
             </a>
           </li>
         </ul>
@@ -39,7 +30,70 @@
 
   <div class="container">
 
+    <div class="row">
+      <div class="col-md-6 col-xs-12">
+    <div class="widget stacked">
 
+      <div class="widget-header">
+        <i class="icon-bookmark"></i>
+        <h3></h3>
+      </div> <!-- /widget-header -->
+
+      <div class="widget-content">
+
+        <div class="shortcuts">
+          <a href="javascript:;" (click)="sendSurvey()" class="shortcut">
+            <i class="shortcut-icon icon-list-alt"></i>
+            <span class="shortcut-label">Mandar Encuestas..</span>
+          </a>
+
+
+
+          <!--<a href="javascript:;" class="shortcut">
+            <i class="shortcut-icon icon-bookmark"></i>
+            <span class="shortcut-label">Bookmarks</span>
+          </a>
+
+          <a href="javascript:;" class="shortcut">
+            <i class="shortcut-icon icon-signal"></i>
+            <span class="shortcut-label">Reports</span>
+          </a>
+
+          <a href="javascript:;" class="shortcut">
+            <i class="shortcut-icon icon-comment"></i>
+            <span class="shortcut-label">Comments</span>
+          </a>
+
+          <a href="javascript:;" class="shortcut">
+            <i class="shortcut-icon icon-user"></i>
+            <span class="shortcut-label">Users</span>
+          </a>
+
+          <a href="javascript:;" class="shortcut">
+            <i class="shortcut-icon icon-file"></i>
+            <span class="shortcut-label">Notes</span>
+          </a>
+
+          <a href="javascript:;" class="shortcut">
+            <i class="shortcut-icon icon-picture"></i>
+            <span class="shortcut-label">Photos</span>
+          </a>
+
+          <a href="javascript:;" class="shortcut">
+            <i class="shortcut-icon icon-tag"></i>
+            <span class="shortcut-label">Tags</span>
+          </a>-->
+        </div> <!-- /shortcuts -->
+
+      </div> <!-- /widget-content -->
+
+    </div> <!-- /widget -->
+      </div></div>
+
+    <div class="row" *ngIf="isSendSurvey">
+      <div class="col-md-12 col-xs-12">
+        <app-send-survey></app-send-survey>
+      </div></div>
   </div> <!-- /container -->
 
 </div> <!-- /main -->

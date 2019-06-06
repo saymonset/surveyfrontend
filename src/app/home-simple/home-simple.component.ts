@@ -10,6 +10,7 @@ export class HomeSimpleComponent implements OnInit {
   isLogin = false;
   roles: string[];
   authority: string;
+  isSendSurvey = false;
   info: any = {};
   constructor(private tokenService: TokenService, private router: Router) { }
   ngOnInit() {
@@ -31,15 +32,10 @@ export class HomeSimpleComponent implements OnInit {
     }
   }
 
-
-
-  logOut(): void {
-    this.tokenService.logOut();
-    this.isLogin = false;
-    this.authority = '';
-    window.location.reload();
-    // this.router.navigate(['/login']);
+  sendSurvey(): void {
+   this.isSendSurvey = true;
   }
+
 
 
 }
