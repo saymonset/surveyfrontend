@@ -3,7 +3,7 @@ import { HttpClient, HttpEvent, HttpErrorResponse, HttpEventType} from '@angular
 import { throwError, Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { SurveyDTO } from '../dto/SurveyDTO';
-import {AppSettings} from '../dto/AppSettings ';
+import {AppSettings} from '../dto/AppSettings';
 @Injectable()
 export class SendSurveyService {
   baseUrl: string;

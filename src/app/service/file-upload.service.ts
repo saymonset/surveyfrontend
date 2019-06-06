@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpEvent, HttpErrorResponse, HttpEventType} from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import {AppSettings} from '../dto/AppSettings ';
+import {AppSettings} from '../dto/AppSettings';
 @Injectable()
 export class FileUploadService {
 

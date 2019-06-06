@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { JwtModel } from '../dto/jwt-model';
 import { NuevoUsuario } from '../dto/nuevo-usuario';
 const cabecera = {headers: new HttpHeaders({'Content-Type': 'application/json'})};
-import {AppSettings} from '../dto/AppSettings ';
+import {AppSettings} from '../dto/AppSettings';
 @Injectable({
   providedIn: 'root'
 })

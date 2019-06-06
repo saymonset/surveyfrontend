@@ -6,7 +6,7 @@ import { NpsChartDTO } from '../dto/NpsChartDTO';
 import { FilterCHARTDTO } from '../dto/FilterCHARTDTO';
 import { ChartCHARTDTO } from '../dto/ChartCHARTDTO';
 import { UserService } from '../service/user.service';
-import {AppSettings} from '../dto/AppSettings ';
+import {AppSettings} from '../dto/AppSettings';
 import { map } from 'rxjs/operators';
 
 

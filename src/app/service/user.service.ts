@@ -4,7 +4,7 @@ import { Observable, from, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { UserDTO } from '../dto/UserDTO';
 import { map } from 'rxjs/operators';
-import {AppSettings} from '../dto/AppSettings ';
+import {AppSettings} from '../dto/AppSettings';
 @Injectable()
 export class UserService {
   baseUrl: string;

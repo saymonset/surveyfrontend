@@ -6,7 +6,7 @@ import { TreeModelTerritorialDTO } from '../dto/TreeModelTerritorialDTO';
 import { TreeModelServicioDTO } from '../dto/TreeModelServicioDTO';
 import { UserService } from '../service/user.service';
 import { map } from 'rxjs/operators';
-import {AppSettings} from '../dto/AppSettings ';
+import {AppSettings} from '../dto/AppSettings';
 /*const PROTOCOL = 'http';
 const PORT = 8443;*/
 @Injectable()
