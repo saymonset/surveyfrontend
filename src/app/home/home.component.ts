@@ -42,7 +42,11 @@ export class HomeComponent implements OnInit {
     this.isLogin = false;
     this.authority = '';
     window.location.reload();
+    //this.router.navigateByUrl('/login');
     // this.router.navigate(['/login']);
+  }
+  homesimple(): void {
+    this.router.navigateByUrl('/homeSimple');
   }
 
 
