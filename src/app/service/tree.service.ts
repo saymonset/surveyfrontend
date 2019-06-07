@@ -7,22 +7,23 @@ import { TreeModelServicioDTO } from '../dto/TreeModelServicioDTO';
 import { UserService } from '../service/user.service';
 import { map } from 'rxjs/operators';
 import {AppSettings} from '../dto/AppSettings';
+import { TokenService } from '../service/token.service';
 /*const PROTOCOL = 'http';
 const PORT = 8443;*/
 @Injectable()
 export class TreeService {
   baseUrl: string;
-  constructor(private http: HttpClient, private userService: UserService) {
+  constructor(private http: HttpClient, private userService: UserService, private tokenService: TokenService) {
     this.baseUrl = AppSettings.API_ENDPOINT;
   }
 
   getTreeTerritorial(): Observable<TreeModelTerritorialDTO[]> {
-    return this.http.get<TreeModelTerritorialDTO[]>(this.baseUrl + "tree/territorial",
+    return this.http.get<TreeModelTerritorialDTO[]>(this.baseUrl + 'tree/territorial?codeCompany=' + this.tokenService.getCodeCompany(),
       this.getOptions());
   }
 
   getTreeServicio(): Observable<TreeModelServicioDTO[]> {
-    return this.http.get<TreeModelServicioDTO[]>(this.baseUrl + "tree/servicio",
+    return this.http.get<TreeModelServicioDTO[]>(this.baseUrl + 'tree/servicio?codeCompany=' + this.tokenService.getCodeCompany(),
       this.getOptions());
   }
 

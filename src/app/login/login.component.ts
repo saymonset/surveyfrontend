@@ -33,10 +33,11 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(): void {
-    this.usuario = new LoginUsuario(this.form.nombreUsuario, this.form.password);
+    this.usuario = new LoginUsuario(this.form.nombreUsuario, this.form.email, this.form.password);
 
     this.authService.login(this.usuario).subscribe(data => {
         this.tokenService.setToken(data.token);
+        this.tokenService.setEmail(data.email);
         this.tokenService.setUserName(data.nombreUsuario);
         this.tokenService.setCodeCompany(data.codeCompany);
         this.tokenService.setAuthorities(data.authorities);

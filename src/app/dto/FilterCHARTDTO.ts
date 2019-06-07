@@ -5,4 +5,5 @@ export class FilterCHARTDTO {
   public servicioNode: string;
   public dateBegin: Date;
   public dateEnd: Date;
+  public codeCompany: string;
 }

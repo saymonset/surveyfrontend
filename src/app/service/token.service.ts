@@ -4,6 +4,7 @@ const TOKEN_KEY = 'AuthToken';
 const USERNAME_KEY = 'AuthUserName';
 const AUTHORITIES_KEY = 'AutAuthorities';
 const COMPANY_KEY = 'codeCompany';
+const EMAIL_KEY = 'email';
 @Injectable({
   providedIn: 'root'
 })
@@ -12,6 +13,15 @@ export class TokenService {
   roles: Array<string> = [];
 
   constructor() { }
+
+  public setEmail(code: string): void {
+    window.sessionStorage.removeItem(EMAIL_KEY);
+    window.sessionStorage.setItem(EMAIL_KEY, code);
+  }
+
+  public getEmail(): string {
+    return sessionStorage.getItem(EMAIL_KEY);
+  }
 
   public setCodeCompany(code: string): void {
     window.sessionStorage.removeItem(COMPANY_KEY);

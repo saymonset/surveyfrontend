@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-
+import { TokenService } from '../service/token.service';
 import { ChartRepository } from '../repository/chart.repository';
 import { ChartService } from '../service/chart.service';
 import { NpsChartDTO } from '../dto/NpsChartDTO';
@@ -34,11 +34,14 @@ export class CuadrantChartComponent implements OnInit {
               @Inject(SHARED_FILTER_TERRITORIAL_NODE) private territorialNodeEvents: Observable<ShareFilterTerritorialNode>,
               @Inject(SHARED_FILTER_SERVICIO_NODE) private servicioNodeEvents: Observable<ShareFilterServicioNode>,
                @Inject(SHARED_FILTER_EXECUTE) private executeEvents: Observable<ShareFilterExecute>,
-               @Inject(SHARED_FILTER_EXECUTE) private executeObserverEvents: Observer<ShareFilterExecute>) {
+               @Inject(SHARED_FILTER_EXECUTE) private executeObserverEvents: Observer<ShareFilterExecute>,
+               private tokenService: TokenService) {
 
 
     stateEvents.subscribe((update) => {
-   //
+
+      this.filterCHARTDTO.codeCompany = tokenService.getCodeCompany();
+
       if (update.dateBegin != undefined) {
        // console.log('ObservandodateBegin= ' + update.dateBegin);
         this.filterCHARTDTO.dateBegin = update.dateBegin;
