@@ -21,17 +21,17 @@ export class HomeSimpleComponent implements OnInit {
   constructor(private tokenService: TokenService, private router: Router, private loaderService: LoaderService,
               @Inject(COMPLETE_OBSERVER) private completeUploadFile: Observable<CompleteObserver>,
   private sendSurveyService: SendSurveyService) {
+    /**Carga el documento o file*/
     this.loaderService.isLoading.subscribe((v) => {
       console.log(v);
       this.loading = v;
     });
 
+    /**Existe ya data cargada para habilitar el boton de mandar encestas*/
+    this.isExistSurveyBd = sendSurveyService.getExistSurveyBd();
 
-    if (sendSurveyService.existSurveyBd(tokenService.getCodeCompany())) {
-      this.isExistSurveyBd = true;
-    }
-
-
+    /**Cuando completa de subir el archivo , el observer se dispara y coloca
+     * a falso para desaparecer la carga de mandar encuestas..**/
     completeUploadFile.subscribe((update) => {
       if (update.complet) {
         this.isSendSurvey = false;

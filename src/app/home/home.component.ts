@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TokenService } from '../service/token.service';
 import { Router } from '@angular/router';
+import { SendSurveyService } from '../service/survey.service';
+import {isNullOrUndefined} from "util";
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -11,9 +13,16 @@ export class HomeComponent implements OnInit {
   roles: string[];
   authority: string;
   info: any = {};
+  isExistSurveyBd: boolean = false;
+  isRoot: boolean = false;
 
-  constructor(private tokenService: TokenService, private router: Router) {
-
+  constructor(private tokenService: TokenService, private router: Router,
+              private sendSurveyService: SendSurveyService) {
+    /**Existe ya data cargada para habilitar el boton de mandar encestas*/
+    if (sendSurveyService.existSurveyBd(tokenService.getCodeCompany())) {
+      this.isExistSurveyBd = true;
+      sendSurveyService.setExistSurveyBd(this.isExistSurveyBd);
+    }
   }
   ngOnInit() {
 
@@ -21,6 +30,7 @@ export class HomeComponent implements OnInit {
       this.info = {
         nombreUsuario: this.tokenService.getUserName(),
       };
+      this.isRoot = (this.tokenService.getCodeCompany() === isNullOrUndefined || this.tokenService.getCodeCompany() ===  '');
       this.isLogin = true;
       this.roles = [];
       this.roles = this.tokenService.getAuthorities();

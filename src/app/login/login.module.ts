@@ -55,6 +55,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatProgressBarModule, MatRadioModule, MatSliderModule} from '@angular/material';
 import { HeadImageComponent } from '../head-image/head-image.component';
 import {COMPLETE_OBSERVER, CompleteObserver} from '../observables-observer-state/completeObserver';
+import { CreateCompanyComponent } from '../create-company/create-company.component';
+
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -100,7 +102,8 @@ import {COMPLETE_OBSERVER, CompleteObserver} from '../observables-observer-state
     DateToComponent,
     HomeSimpleComponent,
     LoaderComponent,
-    HeadImageComponent
+    HeadImageComponent,
+    CreateCompanyComponent
 
   ],
   exports: [LoginComponent, HeadComponent, UploadsComponent, SendSurveyComponent]

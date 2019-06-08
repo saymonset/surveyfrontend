@@ -4,42 +4,23 @@ import { throwError, Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { SurveyDTO } from '../dto/SurveyDTO';
 import {AppSettings} from '../dto/AppSettings';
-import {SendSurveyRepositry} from '../repository/survey.repository';
+import {CreateDataRepositry} from '../repository/createData.repository';
 @Injectable({
   providedIn: 'root'
 })
-export class SendSurveyService {
+export class CreateDataService {
 
   isExistSurveyBd: boolean = false;
 
 
-  constructor(private sendSurveyRepositry: SendSurveyRepositry) {}
+  constructor(private createDataRepositry: CreateDataRepositry) {}
 
   send(formData) {
-    return this.sendSurveyRepositry.send(formData);
-  }
-
-  sentVerify(codigoEncuesta, email, lang, codeCompany): Observable<SurveyDTO> {
-    return  this.sendSurveyRepositry.sentVerify(codigoEncuesta, email, lang, codeCompany);
-  }
-
-  sentResult(objecto: object): Observable<SurveyDTO> {
-    return  this.sendSurveyRepositry.sentResult(objecto);
-  }
-
-  existSurveyBd(codeCompany): boolean {
-    this.sendSurveyRepositry.metodoexistSurveyBd(codeCompany).subscribe(data => {
-      this.isExistSurveyBd = data;
-      },
-      (err: any) => {
-        console.log(err.error.message);
-      }
-    );
-    return  this.isExistSurveyBd ;
+    return this.createDataRepositry.send(formData);
   }
 
   public setExistSurveyBd(isExistSurveyBd: boolean): void {
-        this.isExistSurveyBd = isExistSurveyBd;
+    this.isExistSurveyBd = isExistSurveyBd;
   }
 
   public getExistSurveyBd(): boolean {

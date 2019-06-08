@@ -1,50 +1,45 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpEvent, HttpErrorResponse, HttpEventType} from '@angular/common/http';
 import { throwError, Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { SurveyDTO } from '../dto/SurveyDTO';
 import {AppSettings} from '../dto/AppSettings';
-import {SendSurveyRepositry} from '../repository/survey.repository';
+import {COMPLETE_OBSERVER, CompleteObserver} from '../observables-observer-state/completeObserver';
+import {  Observer } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class SendSurveyService {
+export class CreateDataRepositry {
+  baseUrl: string;
+  datafillUrl = '';
 
-  isExistSurveyBd: boolean = false;
-
-
-  constructor(private sendSurveyRepositry: SendSurveyRepositry) {}
+  constructor(private http: HttpClient,
+              @Inject(COMPLETE_OBSERVER) private completeUploadFile: Observer<CompleteObserver>) {
+    this.baseUrl = AppSettings.API_ENDPOINT;
+    this.datafillUrl = this.baseUrl + 'datafill/all';
+  }
 
   send(formData) {
-    return this.sendSurveyRepositry.send(formData);
-  }
+    return this.http.post<any>(`${this.datafillUrl}`, formData, {
+      reportProgress: true,
+      observe: 'events'
+    }).pipe(map((event) => {
+        switch (event.type) {
 
-  sentVerify(codigoEncuesta, email, lang, codeCompany): Observable<SurveyDTO> {
-    return  this.sendSurveyRepositry.sentVerify(codigoEncuesta, email, lang, codeCompany);
-  }
+          case HttpEventType.UploadProgress:
+            const progress = Math.round(100 * event.loaded / event.total);
+            return { status: 'progress', message: progress };
 
-  sentResult(objecto: object): Observable<SurveyDTO> {
-    return  this.sendSurveyRepositry.sentResult(objecto);
-  }
-
-  existSurveyBd(codeCompany): boolean {
-    this.sendSurveyRepositry.metodoexistSurveyBd(codeCompany).subscribe(data => {
-      this.isExistSurveyBd = data;
-      },
-      (err: any) => {
-        console.log(err.error.message);
-      }
+          case HttpEventType.Response:
+            this.completeUploadFile.next(new CompleteObserver(true));
+            return event.body;
+          default:
+            return `Unhandled event: ${event.type}`;
+        }
+      })
     );
-    return  this.isExistSurveyBd ;
   }
 
-  public setExistSurveyBd(isExistSurveyBd: boolean): void {
-        this.isExistSurveyBd = isExistSurveyBd;
-  }
-
-  public getExistSurveyBd(): boolean {
-    return this.isExistSurveyBd;
-  }
 
   private getEventMessage(event: HttpEvent<any>, formData) {
 

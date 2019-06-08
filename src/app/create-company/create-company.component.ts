@@ -1,16 +1,18 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { SendSurveyService } from '../service/survey.service';
+import { CreateDataService } from '../service/createData.service';
 import { LoaderService } from '../loader.service';
 import { TokenService } from '../service/token.service';
 import {COMPLETE_OBSERVER, CompleteObserver} from '../observables-observer-state/completeObserver';
 import { Observable } from 'rxjs';
+
 @Component({
-  selector: 'app-send-survey',
-  templateUrl: './send-survey.component.html',
-  styleUrls: ['./send-survey.component.css']
+  selector: 'app-create-company',
+  templateUrl: './create-company.component.html',
+  styleUrls: ['./create-company.component.css']
 })
-export class SendSurveyComponent implements OnInit {
+export class CreateCompanyComponent implements OnInit {
+
 
   form: FormGroup;
   error: string;
@@ -20,12 +22,12 @@ export class SendSurveyComponent implements OnInit {
   isCompleteUploadFile: boolean;
 
 
-  constructor(private formBuilder: FormBuilder, private sendSurveyService: SendSurveyService,
+  constructor(private formBuilder: FormBuilder, private createDataService: CreateDataService,
               private loaderService: LoaderService, private tokenService: TokenService,
               @Inject(COMPLETE_OBSERVER) private completeUploadFile: Observable<CompleteObserver>
   ) {
+    /**Cargando el archivo .. se prende este observer*/
     this.loaderService.isLoading.subscribe((v) => {
-    //  console.log(v);
       this.loading = v;
       if (this.loading){
         this.sendResponse.status = 'progress';
@@ -59,11 +61,13 @@ export class SendSurveyComponent implements OnInit {
 
   onSubmit() {
     const formData = new FormData();
+    this.sendResponse.status = 'progress';
     formData.append('file', this.form.get('file').value);
     formData.append('codeCompany', this.tokenService.getCodeCompany());
-    this.sendSurveyService.send(formData).subscribe(
+    this.createDataService.send(formData).subscribe(
       (res) => this.sendResponse = res,
       (err) => this.error = err
     );
   }
+
 }
