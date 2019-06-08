@@ -40,6 +40,7 @@ import { SHARED_FILTER_DATE_END, ShareFilterDateEnd } from '../observables-obser
 import { SHARED_FILTER_SERVICIO_NODE, ShareFilterServicioNode } from '../observables-observer-state/ShareFilterServicioNode';
 import { SHARED_FILTER_TERRITORIAL_NODE, ShareFilterTerritorialNode } from '../observables-observer-state/ShareFilterTerritorialNode';
 import { SHARED_FILTER_EXECUTE, ShareFilterExecute } from '../observables-observer-state/ShareFilterExecute';
+import { MAIN_OBSERVER, MainObserver } from '../observables-observer-state/MainObserver';
 import { interceptorProvider } from '../interceptors/producto-interceptor.service';
 import { HomeComponent } from '../home/home.component';
 import { WidgetRepository } from '../repository/widget.repository';
@@ -56,7 +57,7 @@ import {MatProgressBarModule, MatRadioModule, MatSliderModule} from '@angular/ma
 import { HeadImageComponent } from '../head-image/head-image.component';
 import {COMPLETE_OBSERVER, CompleteObserver} from '../observables-observer-state/completeObserver';
 import { CreateCompanyComponent } from '../create-company/create-company.component';
-
+import { MainComponent } from '../main/main.component';
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -77,6 +78,7 @@ import { CreateCompanyComponent } from '../create-company/create-company.compone
     [{ provide: SHARED_FILTER_SERVICIO_NODE, useValue: new Subject<ShareFilterServicioNode>() }],
     [{ provide: SHARED_FILTER_TERRITORIAL_NODE, useValue: new Subject<ShareFilterTerritorialNode>() }],
     [{ provide: SHARED_FILTER_EXECUTE, useValue: new Subject<ShareFilterExecute>() }],
+    [{ provide: MAIN_OBSERVER, useValue: new Subject<MainObserver>() }],
     [{ provide: COMPLETE_OBSERVER, useValue: new Subject<CompleteObserver>() }]],
   declarations: [UploadsComponent, LoginComponent,
     DivisionServicioComponent,
@@ -103,7 +105,8 @@ import { CreateCompanyComponent } from '../create-company/create-company.compone
     HomeSimpleComponent,
     LoaderComponent,
     HeadImageComponent,
-    CreateCompanyComponent
+    CreateCompanyComponent,
+    MainComponent
 
   ],
   exports: [LoginComponent, HeadComponent, UploadsComponent, SendSurveyComponent]

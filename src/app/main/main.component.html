@@ -1,0 +1,8 @@
+<paMessages></paMessages>
+<div *ngIf="isLogged">
+  <app-home></app-home>
+</div>
+
+<div *ngIf="!isLogged">
+  <app-login></app-login>
+</div>

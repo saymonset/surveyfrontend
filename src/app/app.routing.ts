@@ -3,6 +3,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HeadComponent } from './head/head.component';
 import { LoginFirstGuard } from './loginFirst.guard';
+import { MainFirstGuard }  from './mainFirst.guard';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { SurveytestComponent } from './surveytest/surveytest.component';
 import { UploadsComponent } from './uploads/uploads.component';
@@ -11,21 +12,23 @@ import { GuardService as guard} from './guards/guard.service';
 import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeSimpleComponent } from './home-simple/home-simple.component';
-
+import {MainComponent} from './main/main.component';
 
 const routes: Routes = [
-  { path: 'sendSurvey', component: SendSurveyComponent , canActivate: [LoginFirstGuard]},
+  { path: 'sendSurvey', component: SendSurveyComponent , canActivate: [MainFirstGuard]},
   { path: 'survey', component: SurveytestComponent },
-  { path: 'head', component: HeadComponent, canActivate: [LoginFirstGuard] },
-  { path: 'home', component: HomeComponent, canActivate: [LoginFirstGuard] },
-  { path: 'registro', component: SignUpComponent, canActivate: [LoginFirstGuard] },
-  { path: 'dashboard', component: DashboardComponent , canActivate: [LoginFirstGuard]},
-  { path: 'homeSimple', component: HomeSimpleComponent, canActivate: [LoginFirstGuard] },
+  { path: 'head', component: HeadComponent, canActivate: [MainFirstGuard] },
+  { path: 'home', component: HomeComponent, canActivate: [MainFirstGuard] },
+  { path: 'registro', component: SignUpComponent, canActivate: [MainFirstGuard] },
+  { path: 'dashboard', component: DashboardComponent , canActivate: [MainFirstGuard]},
+  { path: 'homeSimple', component: HomeSimpleComponent, canActivate: [MainFirstGuard] },
+  {path: 'login', component: LoginComponent, canActivate: [MainFirstGuard]},
 
-  {path: '', component: LoginComponent},
-  {path: 'login', component: LoginComponent},
+  {path: '', component: MainComponent},
+  {path: 'main', component: MainComponent},
 
-  {path: '**', redirectTo: 'login', pathMatch: 'full'}
+  {path: '**', redirectTo: 'main', pathMatch: 'full'}
+  //
 ]
 
 /*const routes: Routes = [
