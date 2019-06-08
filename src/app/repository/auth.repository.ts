@@ -4,23 +4,23 @@ import { LoginUsuario } from '../dto/login-usuario';
 import { Observable } from 'rxjs';
 import { JwtModel } from '../dto/jwt-model';
 import { NuevoUsuario } from '../dto/nuevo-usuario';
-import { AuthRepository } from '../repository/auth.repository';
 const cabecera = {headers: new HttpHeaders({'Content-Type': 'application/json'})};
 import {AppSettings} from '../dto/AppSettings';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthRepository {
+  baseUrl: string;
 
-  constructor(private authRepository: AuthRepository) {
+  constructor(private httpClient: HttpClient) {
+    this.baseUrl = AppSettings.API_ENDPOINT;
   }
 
   public login(usuario: LoginUsuario): Observable<JwtModel> {
-    return this.authRepository.login(usuario);
+    return this.httpClient.post<JwtModel>(this.baseUrl + 'api/auth/login', usuario, cabecera);
   }
 
   public registro(usuario: NuevoUsuario): Observable<any> {
-    return this.authRepository.registro(usuario);
+    return this.httpClient.post<any>(this.baseUrl + 'api/auth/nuevo', usuario, cabecera);
   }
 }
-

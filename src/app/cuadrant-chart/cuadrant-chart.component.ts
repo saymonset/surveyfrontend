@@ -1,15 +1,15 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { TokenService } from '../service/token.service';
-import { ChartRepository } from '../repository/chart.repository';
-import { ChartService } from '../service/chart.service';
+import { WidgetRepository } from '../repository/widget.repository';
+import { WidgetService } from '../service/widget.service';
 import { NpsChartDTO } from '../dto/NpsChartDTO';
 import { FilterCHARTDTO } from '../dto/FilterCHARTDTO';
 import { ChartCHARTDTO } from '../dto/ChartCHARTDTO';
-import { SHARED_FILTER_STATE, ShareFilterState } from '../share-filter-state/share-filter-state.model';
-import { SHARED_FILTER_DATE_END, ShareFilterDateEnd } from '../share-filter-state/ShareFilterDateEnd';
-import { SHARED_FILTER_TERRITORIAL_NODE, ShareFilterTerritorialNode } from '../share-filter-state/ShareFilterTerritorialNode';
-import { SHARED_FILTER_SERVICIO_NODE, ShareFilterServicioNode } from '../share-filter-state/ShareFilterServicioNode';
-import { SHARED_FILTER_EXECUTE, ShareFilterExecute } from '../share-filter-state/ShareFilterExecute';
+import { SHARED_FILTER_STATE, ShareFilterState } from '../observables-observer-state/share-filter-state.model';
+import { SHARED_FILTER_DATE_END, ShareFilterDateEnd } from '../observables-observer-state/ShareFilterDateEnd';
+import { SHARED_FILTER_TERRITORIAL_NODE, ShareFilterTerritorialNode } from '../observables-observer-state/ShareFilterTerritorialNode';
+import { SHARED_FILTER_SERVICIO_NODE, ShareFilterServicioNode } from '../observables-observer-state/ShareFilterServicioNode';
+import { SHARED_FILTER_EXECUTE, ShareFilterExecute } from '../observables-observer-state/ShareFilterExecute';
 import { Observable, Observer } from 'rxjs';
 import {isUndefined} from 'util';
 import * as Highcharts from 'highcharts';
@@ -29,13 +29,13 @@ export class CuadrantChartComponent implements OnInit {
   loading = true;
   options: object;
 
-  constructor( private chartRepository: ChartRepository, private chartService: ChartService, @Inject(SHARED_FILTER_STATE) private stateEvents: Observable<ShareFilterState>
+  constructor(private chartRepository: WidgetRepository, private chartService: WidgetService, @Inject(SHARED_FILTER_STATE) private stateEvents: Observable<ShareFilterState>
     , @Inject(SHARED_FILTER_DATE_END) private dateEndEvents: Observable<ShareFilterDateEnd>,
               @Inject(SHARED_FILTER_TERRITORIAL_NODE) private territorialNodeEvents: Observable<ShareFilterTerritorialNode>,
               @Inject(SHARED_FILTER_SERVICIO_NODE) private servicioNodeEvents: Observable<ShareFilterServicioNode>,
-               @Inject(SHARED_FILTER_EXECUTE) private executeEvents: Observable<ShareFilterExecute>,
-               @Inject(SHARED_FILTER_EXECUTE) private executeObserverEvents: Observer<ShareFilterExecute>,
-               private tokenService: TokenService) {
+              @Inject(SHARED_FILTER_EXECUTE) private executeEvents: Observable<ShareFilterExecute>,
+              @Inject(SHARED_FILTER_EXECUTE) private executeObserverEvents: Observer<ShareFilterExecute>,
+              private tokenService: TokenService) {
 
 
     stateEvents.subscribe((update) => {

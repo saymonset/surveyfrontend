@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { TreeModel, NodeEvent } from 'ng2-tree';
 import { TreeService } from '../service/tree.service';
-import { SHARED_FILTER_SERVICIO_NODE, ShareFilterServicioNode } from '../share-filter-state/ShareFilterServicioNode';
+import { SHARED_FILTER_SERVICIO_NODE, ShareFilterServicioNode } from '../observables-observer-state/ShareFilterServicioNode';
 import { Observer } from 'rxjs';
 @Component({
   selector: 'app-division-servicio',

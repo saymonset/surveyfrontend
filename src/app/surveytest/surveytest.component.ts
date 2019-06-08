@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { SendSurveyService } from '../service/send-survey';
+import { SendSurveyService } from '../service/survey.service';
 import { SurveyDTO } from '../dto/SurveyDTO';
 import { TokenService } from '../service/token.service';
 @Component({

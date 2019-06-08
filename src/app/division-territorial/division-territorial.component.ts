@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { TreeModel, NodeEvent } from 'ng2-tree';
 import { TreeService } from '../service/tree.service';
-import { SHARED_FILTER_TERRITORIAL_NODE, ShareFilterTerritorialNode } from '../share-filter-state/ShareFilterTerritorialNode';
+import { SHARED_FILTER_TERRITORIAL_NODE, ShareFilterTerritorialNode } from '../observables-observer-state/ShareFilterTerritorialNode';
 import { Observer } from 'rxjs';
 @Component({
   selector: 'app-division-territorial',

@@ -35,14 +35,14 @@ import { SendSurveyComponent } from '../send-survey/send-survey.component';
 import { NpsMainChartComponent } from '../nps-main-chart/nps-main-chart.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
-import { SHARED_FILTER_STATE, ShareFilterState } from '../share-filter-state/share-filter-state.model';
-import { SHARED_FILTER_DATE_END, ShareFilterDateEnd } from '../share-filter-state/ShareFilterDateEnd';
-import { SHARED_FILTER_SERVICIO_NODE, ShareFilterServicioNode } from '../share-filter-state/ShareFilterServicioNode';
-import { SHARED_FILTER_TERRITORIAL_NODE, ShareFilterTerritorialNode } from '../share-filter-state/ShareFilterTerritorialNode';
-import { SHARED_FILTER_EXECUTE, ShareFilterExecute } from '../share-filter-state/ShareFilterExecute';
+import { SHARED_FILTER_STATE, ShareFilterState } from '../observables-observer-state/share-filter-state.model';
+import { SHARED_FILTER_DATE_END, ShareFilterDateEnd } from '../observables-observer-state/ShareFilterDateEnd';
+import { SHARED_FILTER_SERVICIO_NODE, ShareFilterServicioNode } from '../observables-observer-state/ShareFilterServicioNode';
+import { SHARED_FILTER_TERRITORIAL_NODE, ShareFilterTerritorialNode } from '../observables-observer-state/ShareFilterTerritorialNode';
+import { SHARED_FILTER_EXECUTE, ShareFilterExecute } from '../observables-observer-state/ShareFilterExecute';
 import { interceptorProvider } from '../interceptors/producto-interceptor.service';
 import { HomeComponent } from '../home/home.component';
-import { ChartRepository } from '../repository/chart.repository';
+import { WidgetRepository } from '../repository/widget.repository';
 import { DateFromComponent } from '../date-from/date-from.component';
 import { DateToComponent } from '../date-to/date-to.component';
 import { HomeSimpleComponent } from '../home-simple/home-simple.component';
@@ -54,6 +54,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatProgressBarModule, MatRadioModule, MatSliderModule} from '@angular/material';
 import { HeadImageComponent } from '../head-image/head-image.component';
+import {COMPLETE_OBSERVER, CompleteObserver} from '../observables-observer-state/completeObserver';
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -67,13 +68,14 @@ import { HeadImageComponent } from '../head-image/head-image.component';
       useFactory: adapterFactory
     })
   ],
-  providers: [LoaderService, interceptorProvider, UserDTO, TokenDTO, TreeModelTerritorialDTO, ChartRepository,
+  providers: [LoaderService, interceptorProvider, UserDTO, TokenDTO, TreeModelTerritorialDTO, WidgetRepository,
      { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
     [{ provide: SHARED_FILTER_STATE, useValue: new Subject<ShareFilterState>() }],
     [{ provide: SHARED_FILTER_DATE_END, useValue: new Subject<ShareFilterDateEnd>() }],
     [{ provide: SHARED_FILTER_SERVICIO_NODE, useValue: new Subject<ShareFilterServicioNode>() }],
     [{ provide: SHARED_FILTER_TERRITORIAL_NODE, useValue: new Subject<ShareFilterTerritorialNode>() }],
-    [{ provide: SHARED_FILTER_EXECUTE, useValue: new Subject<ShareFilterExecute>() }]],
+    [{ provide: SHARED_FILTER_EXECUTE, useValue: new Subject<ShareFilterExecute>() }],
+    [{ provide: COMPLETE_OBSERVER, useValue: new Subject<CompleteObserver>() }]],
   declarations: [UploadsComponent, LoginComponent,
     DivisionServicioComponent,
     DivisionTerritorialComponent,

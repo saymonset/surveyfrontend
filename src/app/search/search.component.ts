@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild, Inject} from '@angular/core';
-import { SHARED_FILTER_STATE, ShareFilterState } from '../share-filter-state/share-filter-state.model';
-import { SHARED_FILTER_DATE_END, ShareFilterDateEnd } from '../share-filter-state/ShareFilterDateEnd';
+import { SHARED_FILTER_STATE, ShareFilterState } from '../observables-observer-state/share-filter-state.model';
+import { SHARED_FILTER_DATE_END, ShareFilterDateEnd } from '../observables-observer-state/ShareFilterDateEnd';
 /*import {NgbDateStruct, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';*/
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { Observer } from 'rxjs';

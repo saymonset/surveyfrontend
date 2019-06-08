@@ -1,26 +1,26 @@
 import { Injectable } from '@angular/core';
 import { NpsChartDTO } from '../dto/NpsChartDTO';
 import { FilterCHARTDTO } from '../dto/FilterCHARTDTO';
-import { ChartRepository } from '../repository/chart.repository';
+import { WidgetRepository } from '../repository/widget.repository';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import * as Highcharts from 'highcharts';
 
 @Injectable()
-export class ChartService {
+export class WidgetService {
   npsChartDTO: NpsChartDTO = new NpsChartDTO();
   check: String;
   loading = true;
   options: object;
   Highcharts:  typeof Highcharts = Highcharts;
   chartOptions:  Highcharts.Options;
-  constructor( private chartRepository: ChartRepository) {
+  constructor( private widgetRepository: WidgetRepository) {
   }
 
 
 
   chart(filterCHARTDTO: FilterCHARTDTO):  Observable<NpsChartDTO>{
-    return this.chartRepository.chart(filterCHARTDTO);
+    return this.widgetRepository.chart(filterCHARTDTO);
   }
 
 

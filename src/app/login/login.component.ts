@@ -45,7 +45,11 @@ export class LoginComponent implements OnInit {
         this.isLoginFail = false;
         this.roles = this.tokenService.getAuthorities();
       // window.location.reload();
+      /**Login Si se llama nuevamente y con el token lleno.. se llama a
+       * <app-home></app-home> */
        this.router.navigateByUrl('/login');
+        /**Login Si se llama nuevamente y con el token lleno.. se llama a
+         * <app-home></app-home> */
       },
       (err: any) => {
         this.isLogged = false;
@@ -56,34 +60,5 @@ export class LoginComponent implements OnInit {
   }
 
 
-  /*
-
-    userDTO: UserDTO = new UserDTO();
-    public errorMessage: string;
-    constructor(private auth: AuthService,
-                private router: Router) {
-    }
-
-    ngOnInit() {
-    }
-
-    authenticate(form: NgForm) {
-      if (form.valid) {
-  // perform authentication
-        this.auth.authenticate(this.userDTO)
-          .subscribe(response => {
-            if (response) {
-              this.router.navigateByUrl('/head');
-            }
-            this.errorMessage = 'Authentication Failed';
-          });
-      } else {
-        this.errorMessage = 'Form Data Invalid';
-      }
-    }
-      resetForm() {
-            this.userDTO.clear();
-       }
-  */
 
 }

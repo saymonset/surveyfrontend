@@ -9,9 +9,10 @@ import { UserService } from '../service/user.service';
 import {AppSettings} from '../dto/AppSettings';
 import { map } from 'rxjs/operators';
 
-
-@Injectable()
-export class ChartRepository {
+@Injectable({
+  providedIn: 'root'
+})
+export class WidgetRepository {
   baseUrl: string;
   auth_token: string;
   constructor(private http: HttpClient, private  userService: UserService) {
@@ -19,20 +20,20 @@ export class ChartRepository {
   }
 
   chart(filterCHARTDTO: FilterCHARTDTO): Observable<NpsChartDTO> {
-    return  this.http.post<NpsChartDTO>(this.baseUrl + 'search/nps', filterCHARTDTO, this.getOptions());
+    return  this.http.post<NpsChartDTO>(this.baseUrl + 'search/nps', filterCHARTDTO);
   }
 
 
 
 
 
-  private getOptions() {
+/*  private getOptions() {
     return {
       headers: new HttpHeaders({
-        'Accept': 'application/json, */*',
+        'Accept': 'application/json, *!/!*',
         'Authorization': `${this.userService.auth_token}`
       })
     };
-  }
+  }*/
 
 }

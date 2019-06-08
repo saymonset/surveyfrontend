@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { SendSurveyService } from '../service/send-survey';
+import { SendSurveyService } from '../service/survey.service';
 import { LoaderService } from '../loader.service';
 import { TokenService } from '../service/token.service';
-
+import {COMPLETE_OBSERVER, CompleteObserver} from '../observables-observer-state/completeObserver';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-send-survey',
   templateUrl: './send-survey.component.html',
@@ -20,10 +21,13 @@ export class SendSurveyComponent implements OnInit {
   sendResponse = { status: '', message: '', filePath: '' };
   loading: boolean;
   porcent:number = 0;
+  isCompleteUploadFile: boolean;
 
 
   constructor(private formBuilder: FormBuilder, private sendSurveyService: SendSurveyService,
-              private loaderService: LoaderService, private tokenService: TokenService) {
+              private loaderService: LoaderService, private tokenService: TokenService,
+              @Inject(COMPLETE_OBSERVER) private completeUploadFile: Observable<CompleteObserver>
+  ) {
     this.loaderService.isLoading.subscribe((v) => {
     //  console.log(v);
       this.loading = v;
@@ -31,7 +35,18 @@ export class SendSurveyComponent implements OnInit {
         this.sendResponse.status = 'progress';
         this.porcent = this.porcent + 1;
       }
-    }); }
+    });
+
+
+    completeUploadFile.subscribe((update) => {
+      if (update.complet) {
+        this.isCompleteUploadFile = true;
+      }
+    });
+  }
+
+
+
 
   ngOnInit() {
     this.form = this.formBuilder.group({

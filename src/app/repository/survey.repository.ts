@@ -1,20 +1,27 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpEvent, HttpErrorResponse, HttpEventType} from '@angular/common/http';
 import { throwError, Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { SurveyDTO } from '../dto/SurveyDTO';
 import {AppSettings} from '../dto/AppSettings';
-@Injectable()
-export class SendSurveyService {
+import {COMPLETE_OBSERVER, CompleteObserver} from '../observables-observer-state/completeObserver';
+import {  Observer } from 'rxjs';
+@Injectable({
+  providedIn: 'root'
+})
+export class SendSurveyRepositry {
   baseUrl: string;
-  apiUrl = ''; // http://localhost:8443/survey/send';
-  apiUrlSent = ''; // "http://localhost:8443/survey/searchSurvey?";
-  apiUrlSentResult = ''; // "http://localhost:8443/survey/sent/result";
-  constructor(private http: HttpClient) {
+  apiUrl = '';
+  apiUrlSent = '';
+  apiUrlSentResult = '';
+  existSurveyBd = '';
+  constructor(private http: HttpClient,
+              @Inject(COMPLETE_OBSERVER) private completeUploadFile: Observer<CompleteObserver>) {
     this.baseUrl = AppSettings.API_ENDPOINT;
     this.apiUrl = this.baseUrl + 'survey/send';
     this.apiUrlSent = this.baseUrl + 'survey/searchSurvey?';
     this.apiUrlSentResult = this.baseUrl + 'survey/sent/result';
+    this.existSurveyBd = this.baseUrl + 'survey/existSurveyBd?';
   }
 
   send(formData) {
@@ -29,12 +36,18 @@ export class SendSurveyService {
             return { status: 'progress', message: progress };
 
           case HttpEventType.Response:
+            this.completeUploadFile.next(new CompleteObserver(true));
             return event.body;
           default:
             return `Unhandled event: ${event.type}`;
         }
       })
     );
+  }
+
+
+  metodoexistSurveyBd(codeCompany): Observable<boolean> {
+    return  this.http.get<boolean>(this.existSurveyBd + "codeCompany=" + codeCompany);
   }
 
   sentVerify(codigoEncuesta, email, lang, codeCompany): Observable<SurveyDTO> {

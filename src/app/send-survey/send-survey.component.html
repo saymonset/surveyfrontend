@@ -21,6 +21,7 @@
       </div> <!-- /widget-header -->
       <div class="widget-content">
         <div class="shortcuts">
+
           <div>
             <div *ngIf="error">
               {{ error.message }}
@@ -32,7 +33,7 @@
 
 
               <div role="progressbar" [style.width.%]="sendResponse.message" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                {{sendResponse.message}}%
+                {{isCompleteUploadFile}}
               </div>
 
             </div>

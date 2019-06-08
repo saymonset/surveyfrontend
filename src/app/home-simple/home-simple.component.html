@@ -42,12 +42,12 @@
 
       <div class="widget-content">
 
-        <div class="shortcuts">
-          <a href="javascript:;" (click)="sendSurvey()" class="shortcut">
+        <div class="shortcuts" >
+          <a href="javascript:;" (click)="sendSurvey()" *ngIf="isExistSurveyBd" class="shortcut">
             <i class="shortcut-icon icon-list-alt"></i>
             <span class="shortcut-label">Mandar Encuestas..</span>
           </a>
-
+          <span *ngIf="!isExistSurveyBd" class="shortcut-label">Mandar Encuestas..</span>
 
 
           <!--<a href="javascript:;" class="shortcut">
