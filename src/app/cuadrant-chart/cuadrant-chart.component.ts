@@ -12,6 +12,7 @@ import { SHARED_FILTER_SERVICIO_NODE, ShareFilterServicioNode } from '../observa
 import { SHARED_FILTER_EXECUTE, ShareFilterExecute } from '../observables-observer-state/ShareFilterExecute';
 import { Observable, Observer } from 'rxjs';
 import {isUndefined} from 'util';
+import {SatisfactionGeneralCHARTDTO} from '../dto/SatisfactionGeneralCHARTDTO';
 import * as Highcharts from 'highcharts';
 @Component({
   selector: 'app-cuadrant-chart',
@@ -21,7 +22,7 @@ import * as Highcharts from 'highcharts';
 export class CuadrantChartComponent implements OnInit {
   Highcharts:  typeof Highcharts = Highcharts;
   chartOptions:  Highcharts.Options;
-  npsChartDTO: NpsChartDTO = new NpsChartDTO();
+  npsChartDTO: SatisfactionGeneralCHARTDTO = new SatisfactionGeneralCHARTDTO();
   filterCHARTDTO: FilterCHARTDTO = new  FilterCHARTDTO();
   chartCHARTDTO: ChartCHARTDTO = new ChartCHARTDTO();
   error: string;
@@ -43,7 +44,7 @@ export class CuadrantChartComponent implements OnInit {
       this.filterCHARTDTO.codeCompany = tokenService.getCodeCompany();
 
       if (update.dateBegin != undefined) {
-       // console.log('ObservandodateBegin= ' + update.dateBegin);
+        // console.log('ObservandodateBegin= ' + update.dateBegin);
         this.filterCHARTDTO.dateBegin = update.dateBegin;
         this.executeObserverEvents.next(new ShareFilterExecute('1'));
       }
@@ -58,7 +59,7 @@ export class CuadrantChartComponent implements OnInit {
     });
 
     territorialNodeEvents.subscribe((update) => {
-    //  console.log('Observando territorialNode =' + update.node);
+      //  console.log('Observando territorialNode =' + update.node);
       if (update.node != undefined) {
         this.filterCHARTDTO.territorialNode = update.node;
         this.executeObserverEvents.next(new ShareFilterExecute('3'));
@@ -66,7 +67,7 @@ export class CuadrantChartComponent implements OnInit {
     });
 
     servicioNodeEvents.subscribe((update) => {
-     // console.log('Observando servicioNodeEvents =' + update.node);
+      // console.log('Observando servicioNodeEvents =' + update.node);
       if (update.node != undefined) {
         this.filterCHARTDTO.servicioNode = update.node;
         this.executeObserverEvents.next(new ShareFilterExecute('4'));
@@ -76,136 +77,117 @@ export class CuadrantChartComponent implements OnInit {
 
     executeEvents.subscribe((update) => {
       if (update.isExecute === '1' || update.isExecute === '2'|| update.isExecute === '3'|| update.isExecute === '4') {
-        console.log(' true ejecuta isExecute =' + update.isExecute);
-        this.chartService.chart(this.filterCHARTDTO).subscribe(data => {
+        this.chartService.satisfactionGeneral(this.filterCHARTDTO).subscribe(data => {
+            console.log(JSON.stringify(data));
             this.npsChartDTO = data;
-            this.check = new String(this.npsChartDTO.series[0].data[0]);
-            let splitted = this.check.split(",");
-            let re = "'";
-            let cad = splitted[0].replace(/re/gi,"");
-            let num = splitted[1].replace(/re/gi,"");
-            this.npsChartDTO.series[0].data[0] = [cad, parseFloat(num)];
 
-            this.check = new String(this.npsChartDTO.series[0].data[1]);
-            splitted = this.check.split(",");
-            re = "'";
-            cad = splitted[0].replace(/re/gi,"");
-            num = splitted[1].replace(/re/gi,"");
-            this.npsChartDTO.series[0].data[1] = [cad, parseFloat(num)];
-
-            this.check = new String(this.npsChartDTO.series[0].data[2]);
-            splitted = this.check.split(",");
-            re = "'";
-            cad = splitted[0].replace(/re/gi,"");
-            num = splitted[1].replace(/re/gi,"");
-            this.npsChartDTO.series[0].data[2] = [cad, parseFloat(num)];
 
             this.options = this.npsChartDTO;
             this.chartOptions=  this.options;
             this.loading = false;
           },
           () => { });
-       this.executeObserverEvents.next(new ShareFilterExecute('0'));
+        this.executeObserverEvents.next(new ShareFilterExecute('0'));
       }
     });
 
 
   }
-  /* this.chartRepository.chart(this.filterCHARTDTO).subscribe(data => {
-        this.npsChartDTO = data;
 
-
-        this.check = new String(this.npsChartDTO.series[0].data[0]);
-        let splitted = this.check.split(",");
-        let re = "'";
-        let cad = splitted[0].replace(/re/gi,"");
-        let num = splitted[1].replace(/re/gi,"");
-        this.npsChartDTO.series[0].data[0] = [cad, parseFloat(num)];
-
-        this.check = new String(this.npsChartDTO.series[0].data[1]);
-        splitted = this.check.split(",");
-        re = "'";
-        cad = splitted[0].replace(/re/gi,"");
-        num = splitted[1].replace(/re/gi,"");
-        this.npsChartDTO.series[0].data[1] = [cad, parseFloat(num)];
-
-        this.check = new String(this.npsChartDTO.series[0].data[2]);
-        splitted = this.check.split(",");
-        re = "'";
-        cad = splitted[0].replace(/re/gi,"");
-        num = splitted[1].replace(/re/gi,"");
-        this.npsChartDTO.series[0].data[2] = [cad, parseFloat(num)];
-
-        this.options = this.npsChartDTO;
-        this.chartOptions=  this.options;
-        this.loading = false;
-      },
-      () => { });
-
-   // this.chartOptions = this.chartService.chart(this.filterCHARTDTO) ;
-    console.log('saymons = ' + this.chartOptions);
-
-  }*/
   ngOnInit() {
 
 
 
   }
-  /*Highcharts: typeof Highcharts = Highcharts;
-  chartOptions: Highcharts.Options = {
-    series: [{
-      data: [1, 2, 3],
-      type: 'line'
-    }]*/
- /* chartOptions: Highcharts.Options = {
 
-    "chart": {
-      "plotBackgroundColor": null,
-      "plotBorderWidth": 0,
-      "plotShadow": false
-    },
-    "title": {
-      "text": "NPS - Net Promoter Score",
-      "align": "center",
-      "verticalAlign": "middle",
-      "y": 40
-    },
-    "tooltip": {
-      "pointFormat": "{series.name}: <b>{point.percentage:.1f}%</b>"
-    },
-    "plotOptions": {
-      "pie": {
-        "dataLabels": {
-          "enabled": true,
-          "distance": -50,
-          "style": {
-            "fontWeight": "bold",
-            "color": "white"
+
+
+   /* this.chartOptions = {
+      title: {
+        text: 'Browser market shares in January, 2018'
+      },
+      tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+      },
+      plotOptions: {
+        pie: {
+          allowPointSelect: true,
+          cursor: 'pointer',
+          dataLabels: {
+            enabled: true,
+            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+            style: {
+              color: 'black'
+            },
+            connectorColor: 'silver'
           }
-        },
-        "startAngle": -90,
-        "endAngle": 90,
-        "center": [
-          "50%",
-          "75%"
+        }
+      },
+      series: [{
+        name: 'Share',
+        data: [
+          { name: 'Chrome', y: 61.41 },
+          { name: 'Internet Explorer', y: 11.84 },
+          { name: 'Firefox', y: 10.85 },
+          { name: 'Edge', y: 4.67 },
+          { name: 'Safari', y: 4.18 },
+          { name: 'Other', y: 7.05 }
         ],
-        "size": "110%"
-      }
-    },
-    "series": [
-      {
-        "type": "pie",
-        "name": "",
-        "innerSize": "50%",
-        "data": [
+        type: 'pie'
+      }]}*/
 
-          ['Detractores', 13.29],
-          ['Promotores', 13],
-          ['pasivos', 3.78]
-        ]
-      }
-    ]
-  };*/
+
+
+   /* this.chartOptions= {
+
+      "chart": {
+        "plotBackgroundColor": null,
+        "plotBorderWidth": 0,
+        "plotShadow": false
+      },
+      "title": {
+        "text": "NPS - Net Promoter Score",
+        "align": "center",
+        "verticalAlign": "middle",
+        "y": 40
+      },
+      "tooltip": {
+        "pointFormat": "{series.name}: <b>{point.percentage:.1f}%</b>"
+      },
+      "plotOptions": {
+        "pie": {
+          "dataLabels": {
+            "enabled": true,
+            "distance": -50,
+            "style": {
+              "fontWeight": "bold",
+              "color": "white"
+            }
+          },
+          "startAngle": -90,
+          "endAngle": 90,
+          "center": [
+            "50%",
+            "75%"
+          ],
+          "size": "110%"
+        }
+      },
+      "series": [
+        {
+          "type": "pie",
+          "name": "",
+          "innerSize": "50%",
+          "data": [
+
+            ['Detractores', 13.29],
+            ['Promotores', 13],
+            ['pasivos', 3.78]
+          ]
+        }
+      ]
+    };*/
+
 
 
   /*chartOptions: Highcharts.Options = {

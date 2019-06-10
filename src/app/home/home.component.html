@@ -66,19 +66,17 @@
 
 
 
-
+  <!--SOLO SE USA PARA ROOT-->
 <div *ngIf="isRoot"><app-create-company></app-create-company></div>
+    <!--END SOLO SE USA PARA ROOT-->
 
-    <div *ngIf="!isLogin">
-      <div class="row">
-        <div class="col-md-6 col-xs-12">
-          <app-login></app-login>
-        </div>
-      </div>
-    </div>
     <div *ngIf="isLogin && !isRoot">
     <div class="row">
       <div class="col-md-6 col-xs-12">
+        <app-nps-main-chart></app-nps-main-chart>
+      </div>
+      <div class="col-md-6">
+        <!--<app-nps-main-chart></app-nps-main-chart>-->
         <app-cuadrant-chart></app-cuadrant-chart>
       </div>
     </div>

@@ -8,7 +8,7 @@ import { ChartCHARTDTO } from '../dto/ChartCHARTDTO';
 import { UserService } from '../service/user.service';
 import {AppSettings} from '../dto/AppSettings';
 import { map } from 'rxjs/operators';
-
+import {SatisfactionGeneralCHARTDTO} from '../dto/SatisfactionGeneralCHARTDTO';
 @Injectable({
   providedIn: 'root'
 })
@@ -23,9 +23,13 @@ export class WidgetRepository {
     return  this.http.post<NpsChartDTO>(this.baseUrl + 'search/nps', filterCHARTDTO);
   }
 
+  nps(filterCHARTDTO: FilterCHARTDTO): Observable<NpsChartDTO> {
+    return  this.http.post<NpsChartDTO>(this.baseUrl + 'search/nps', filterCHARTDTO);
+  }
 
-
-
+  satisfactionGeneral(filterCHARTDTO: FilterCHARTDTO): Observable<SatisfactionGeneralCHARTDTO> {
+    return  this.http.post<SatisfactionGeneralCHARTDTO>(this.baseUrl + 'search/satisfactionGeneral', filterCHARTDTO);
+  }
 
 /*  private getOptions() {
     return {
