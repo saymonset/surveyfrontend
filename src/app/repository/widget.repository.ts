@@ -20,24 +20,16 @@ export class WidgetRepository {
   }
 
   chart(filterCHARTDTO: FilterCHARTDTO): Observable<NpsChartDTO> {
-    return  this.http.post<NpsChartDTO>(this.baseUrl + 'search/nps', filterCHARTDTO);
+    return  this.http.post<NpsChartDTO>(this.baseUrl + 'widget/nps', filterCHARTDTO);
   }
 
   nps(filterCHARTDTO: FilterCHARTDTO): Observable<NpsChartDTO> {
-    return  this.http.post<NpsChartDTO>(this.baseUrl + 'search/nps', filterCHARTDTO);
+    return  this.http.post<NpsChartDTO>(this.baseUrl + 'widget/nps', filterCHARTDTO);
   }
 
   satisfactionGeneral(filterCHARTDTO: FilterCHARTDTO): Observable<SatisfactionGeneralCHARTDTO> {
-    return  this.http.post<SatisfactionGeneralCHARTDTO>(this.baseUrl + 'search/satisfactionGeneral', filterCHARTDTO);
+    return  this.http.post<SatisfactionGeneralCHARTDTO>(this.baseUrl + 'widget/satisfactionGeneral', filterCHARTDTO);
   }
 
-/*  private getOptions() {
-    return {
-      headers: new HttpHeaders({
-        'Accept': 'application/json, *!/!*',
-        'Authorization': `${this.userService.auth_token}`
-      })
-    };
-  }*/
 
 }
