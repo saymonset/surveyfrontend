@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import * as Highcharts from 'highcharts';
 import {SatisfactionGeneralCHARTDTO} from '../dto/SatisfactionGeneralCHARTDTO';
-
+import { AlertCHARTDTO } from '../dto/AlertCHARTDTO';
 @Injectable()
 export class WidgetService {
   npsChartDTO: NpsChartDTO = new NpsChartDTO();
@@ -33,7 +33,9 @@ export class WidgetService {
   }
 
 
-
+  alerts(filterCHARTDTO: FilterCHARTDTO): Observable<AlertCHARTDTO> {
+    return   this.widgetRepository.alerts(filterCHARTDTO);
+  }
 
 
 

@@ -9,6 +9,7 @@ import { UserService } from '../service/user.service';
 import {AppSettings} from '../dto/AppSettings';
 import { map } from 'rxjs/operators';
 import {SatisfactionGeneralCHARTDTO} from '../dto/SatisfactionGeneralCHARTDTO';
+import { AlertCHARTDTO } from '../dto/AlertCHARTDTO';
 @Injectable({
   providedIn: 'root'
 })
@@ -31,5 +32,8 @@ export class WidgetRepository {
     return  this.http.post<SatisfactionGeneralCHARTDTO>(this.baseUrl + 'widget/satisfactionGeneral', filterCHARTDTO);
   }
 
+  alerts(filterCHARTDTO: FilterCHARTDTO): Observable<AlertCHARTDTO> {
+    return  this.http.post<AlertCHARTDTO>(this.baseUrl + 'widget/alerts', filterCHARTDTO);
+  }
 
 }

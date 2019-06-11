@@ -3,6 +3,7 @@ import { TokenService } from '../service/token.service';
 import { WidgetRepository } from '../repository/widget.repository';
 import { WidgetService } from '../service/widget.service';
 import { NpsChartDTO } from '../dto/NpsChartDTO';
+import { AlertCHARTDTO } from '../dto/AlertCHARTDTO';
 import { FilterCHARTDTO } from '../dto/FilterCHARTDTO';
 import { ChartCHARTDTO } from '../dto/ChartCHARTDTO';
 import { SHARED_FILTER_STATE, ShareFilterState } from '../observables-observer-state/share-filter-state.model';
@@ -77,13 +78,107 @@ export class CuadrantChartComponent implements OnInit {
 
     executeEvents.subscribe((update) => {
       if (update.isExecute === '1' || update.isExecute === '2'|| update.isExecute === '3'|| update.isExecute === '4') {
-        this.chartService.satisfactionGeneral(this.filterCHARTDTO).subscribe(data => {
+        this.chartService.alerts(this.filterCHARTDTO).subscribe(data => {
             console.log(JSON.stringify(data));
+            this.npsChartDTO = new NpsChartDTO();
             this.npsChartDTO = data;
 
 
             this.options = this.npsChartDTO;
             this.chartOptions=  this.options;
+          /**Inicio chart*/
+
+          /**this.chartOptions = {
+            chart: {
+              type: 'column'
+            },
+            title: {
+              text: 'Stacked column chart'
+            },
+            xAxis: {
+              categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']
+            },
+            yAxis: {
+              min: 0,
+              title: {
+                text: 'Total fruit consumption'
+              }
+            },
+            tooltip: {
+              pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
+              shared: true
+            },
+            plotOptions: {
+              column: {
+                stacking: 'percent'
+              }
+            },
+            series: [{
+              name: 'John',
+              data: [5, 3, 4, 7, 2]
+            }, {
+              name: 'Jane',
+              data: [2, 2, 3, 2, 1]
+            }, {
+              name: 'Joe',
+              data: [3, 4, 4, 2, 5]
+            }]
+          };**/
+
+          /*this.chartOptions = {
+            "chart":{
+              "type":"column"
+            },
+            "title":{
+              "text":"Alertas"
+            },
+            "xAxis":{
+              "categories":[
+                "Isla Margarita",
+                "Isla Coche"
+              ]
+            },
+            "yAxis":{
+              "min":0,
+              "title":{
+                "text":"Tipos de Alertas"
+              }
+            },
+            "tooltip":{
+              "pointFormat":"<span style=\"color:{series.color}\">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>",
+              "shared":true
+            },
+            "plotOptions":{
+              "column":{
+                "stacking":"percent"
+              }
+            },
+            "series":[
+              {
+                "name":"passive",
+                "data":[
+                  1,
+                  0
+                ]
+              },
+              {
+                "name":"detractor",
+                "data":[
+                  0,
+                  0
+                ]
+              },
+              {
+                "name":"promoter",
+                "data":[
+                  3,
+                  0
+                ]
+              }
+            ]
+          }
+*/
+            /**Fin chart*/
             this.loading = false;
           },
           () => { });
@@ -100,219 +195,53 @@ export class CuadrantChartComponent implements OnInit {
 
   }
 
+  /**Barras con tres estados cada una*/
+/*
 
-
-   /* this.chartOptions = {
-      title: {
-        text: 'Browser market shares in January, 2018'
-      },
-      tooltip: {
-        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-      },
-      plotOptions: {
-        pie: {
-          allowPointSelect: true,
-          cursor: 'pointer',
-          dataLabels: {
-            enabled: true,
-            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-            style: {
-              color: 'black'
-            },
-            connectorColor: 'silver'
-          }
-        }
-      },
-      series: [{
-        name: 'Share',
-        data: [
-          { name: 'Chrome', y: 61.41 },
-          { name: 'Internet Explorer', y: 11.84 },
-          { name: 'Firefox', y: 10.85 },
-          { name: 'Edge', y: 4.67 },
-          { name: 'Safari', y: 4.18 },
-          { name: 'Other', y: 7.05 }
-        ],
-        type: 'pie'
-      }]}*/
-
-
-
-   /* this.chartOptions= {
-
-      "chart": {
-        "plotBackgroundColor": null,
-        "plotBorderWidth": 0,
-        "plotShadow": false
-      },
-      "title": {
-        "text": "NPS - Net Promoter Score",
-        "align": "center",
-        "verticalAlign": "middle",
-        "y": 40
-      },
-      "tooltip": {
-        "pointFormat": "{series.name}: <b>{point.percentage:.1f}%</b>"
-      },
-      "plotOptions": {
-        "pie": {
-          "dataLabels": {
-            "enabled": true,
-            "distance": -50,
-            "style": {
-              "fontWeight": "bold",
-              "color": "white"
-            }
-          },
-          "startAngle": -90,
-          "endAngle": 90,
-          "center": [
-            "50%",
-            "75%"
-          ],
-          "size": "110%"
-        }
-      },
-      "series": [
-        {
-          "type": "pie",
-          "name": "",
-          "innerSize": "50%",
-          "data": [
-
-            ['Detractores', 13.29],
-            ['Promotores', 13],
-            ['pasivos', 3.78]
-          ]
-        }
-      ]
-    };*/
-
-
-
-  /*chartOptions: Highcharts.Options = {
-
-    chart: {
-      plotBackgroundColor: null,
-      plotBorderWidth: 0,
-      plotShadow: false
-    },
+  this.chartOptions = {
+  chart: {
+    type: 'column'
+  },
+  title: {
+    text: 'Stacked column chart'
+  },
+  xAxis: {
+    categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']
+  },
+  yAxis: {
+    min: 0,
     title: {
-      text: 'NPS - Net Promoter Score',
-      align: 'center',
-      verticalAlign: 'middle',
-      y: 40
-    },
-    tooltip: {
-      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-    },
-    plotOptions: {
-      pie: {
-        dataLabels: {
-          enabled: true,
-          distance: -50,
-          style: {
-            fontWeight: 'bold',
-            color: 'white'
-          }
-        },
-        startAngle: -90,
-        endAngle: 90,
-        center: ['50%', '75%'],
-        size: '110%'
-      }
-    },
-    series: [{
-      type: 'pie',
-      name: '',
-      innerSize: '50%',
-      data: [
-
-        ['Detractores', 13.29],
-        ['Promotores', 13],
-        ['pasivos', 3.78]
-
-      ]
-    }]
-  };
-*/
- /* chartOptions: Highcharts.Options = {
-
-    title: {
-      text: 'Por favor, evalúa el proceso de registro:'
-    },
-
-    subtitle: {
-      text: ''
-    },
-
-    legend: {
-      align: 'right',
-      verticalAlign: 'middle',
-      layout: 'vertical'
-    },
-
-    xAxis: {
-      categories: ['De acuerdo', 'Desacuerdo', 'Neutro'],
-      labels: {
-        x: -10
-      }
-    },
-
-    yAxis: {
-      allowDecimals: false,
-      title: {
-        text: ''
-      }
-    },
-    series: [{
-      name: 'El proceso de registro fue rápido y eficiente.',
-      data: [1, 2, 3],
-      type: 'bar'
-    },
-      {
-        name: 'El personal de la recepción fue muy amable.',
-        data: [6, 4, 2],
-        type: 'bar'
-      },
-      {
-        name: 'La reserva contenía todos los servicios pedidos',
-        data: [8, 4, 3],
-        type: 'bar'
-      }],
-
-    responsive: {
-      rules: [{
-        condition: {
-          maxWidth: 500
-        },
-        chartOptions: {
-          legend: {
-            align: 'center',
-            verticalAlign: 'bottom',
-            layout: 'horizontal'
-          },
-          yAxis: {
-            labels: {
-              align: 'left',
-              x: 0,
-              y: -5
-            },
-            title: {
-              text: null
-            }
-          },
-          subtitle: {
-            text: null
-          },
-          credits: {
-            enabled: false
-          }
-        }
-      }]
+      text: 'Total fruit consumption'
     }
-  };*/
-  /*chartOptions: Highcharts.Options = {
+  },
+  tooltip: {
+    pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
+    shared: true
+  },
+  plotOptions: {
+    column: {
+      stacking: 'percent'
+    }
+  },
+  series: [{
+    name: 'John',
+    data: [5, 3, 4, 7, 2]
+  }, {
+    name: 'Jane',
+    data: [2, 2, 3, 2, 1]
+  }, {
+    name: 'Joe',
+    data: [3, 4, 4, 2, 5]
+  }]
+};
+*/
+
+
+
+  /**Barras hacia arriba*/
+  /***
+
+  this.chartOptions =  {
 
     title: {
       text: 'Por favor, evalúa el proceso de registro:'
@@ -355,6 +284,177 @@ export class CuadrantChartComponent implements OnInit {
         name: 'La reserva contenía todos los servicios pedidos',
         data: [8, 4, 3],
         type: 'column'
+      }],
+
+    responsive: {
+      rules: [{
+        condition: {
+          maxWidth: 500
+        },
+        chartOptions: {
+          legend: {
+            align: 'center',
+            verticalAlign: 'bottom',
+            layout: 'horizontal'
+          },
+          yAxis: {
+            labels: {
+              align: 'left',
+              x: 0,
+              y: -5
+            },
+            title: {
+              text: null
+            }
+          },
+          subtitle: {
+            text: null
+          },
+          credits: {
+            enabled: false
+          }
+        }
+      }]
+    }
+  };*/
+
+
+
+  /**Torta*/
+  /*this.chartOptions = {
+   title: {
+   text: 'Browser market shares in January, 2018'
+   },
+   tooltip: {
+   pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+   },
+   plotOptions: {
+   pie: {
+   allowPointSelect: true,
+   cursor: 'pointer',
+   dataLabels: {
+   enabled: true,
+   format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+   style: {
+   color: 'black'
+   },
+   connectorColor: 'silver'
+   }
+   }
+   },
+   series: [{
+   name: 'Share',
+   data: [
+   { name: 'Chrome', y: 61.41 },
+   { name: 'Internet Explorer', y: 11.84 },
+   { name: 'Firefox', y: 10.85 },
+   { name: 'Edge', y: 4.67 },
+   { name: 'Safari', y: 4.18 },
+   { name: 'Other', y: 7.05 }
+   ],
+   type: 'pie'
+   }]}*/
+
+  /**media torta*/
+  /* this.chartOptions= {
+
+   "chart": {
+   "plotBackgroundColor": null,
+   "plotBorderWidth": 0,
+   "plotShadow": false
+   },
+   "title": {
+   "text": "NPS - Net Promoter Score",
+   "align": "center",
+   "verticalAlign": "middle",
+   "y": 40
+   },
+   "tooltip": {
+   "pointFormat": "{series.name}: <b>{point.percentage:.1f}%</b>"
+   },
+   "plotOptions": {
+   "pie": {
+   "dataLabels": {
+   "enabled": true,
+   "distance": -50,
+   "style": {
+   "fontWeight": "bold",
+   "color": "white"
+   }
+   },
+   "startAngle": -90,
+   "endAngle": 90,
+   "center": [
+   "50%",
+   "75%"
+   ],
+   "size": "110%"
+   }
+   },
+   "series": [
+   {
+   "type": "pie",
+   "name": "",
+   "innerSize": "50%",
+   "data": [
+
+   ['Detractores', 13.29],
+   ['Promotores', 13],
+   ['pasivos', 3.78]
+   ]
+   }
+   ]
+   };*/
+
+
+
+
+  /**Barras invertidas*/
+  /****
+
+   this.chartOptions= {
+
+    title: {
+      text: 'Por favor, evalúa el proceso de registro:'
+    },
+
+    subtitle: {
+      text: ''
+    },
+
+    legend: {
+      align: 'right',
+      verticalAlign: 'middle',
+      layout: 'vertical'
+    },
+
+    xAxis: {
+      categories: ['De acuerdo', 'Desacuerdo', 'Neutro'],
+      labels: {
+        x: -10
+      }
+    },
+
+    yAxis: {
+      allowDecimals: false,
+      title: {
+        text: ''
+      }
+    },
+    series: [{
+      name: 'El proceso de registro fue rápido y eficiente.',
+      data: [1, 2, 3],
+      type: 'bar'
+    },
+      {
+        name: 'El personal de la recepción fue muy amable.',
+        data: [6, 4, 2],
+        type: 'bar'
+      },
+      {
+        name: 'La reserva contenía todos los servicios pedidos',
+        data: [8, 4, 3],
+        type: 'bar'
       }],
 
     responsive: {

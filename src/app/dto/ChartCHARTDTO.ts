@@ -4,4 +4,5 @@ export class ChartCHARTDTO {
   public plotBackgroundColor: number;
   public plotBorderWidth: number
   public plotShadow: boolean;
+  public type: string;
 }

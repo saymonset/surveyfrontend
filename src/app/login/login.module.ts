@@ -32,7 +32,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { SearchComponent } from '../search/search.component';
 import { UploadsComponent } from '../uploads/uploads.component';
 import { SendSurveyComponent } from '../send-survey/send-survey.component';
-import { NpsMainChartComponent } from '../nps-main-chart/nps-main-chart.component';
+import { NpsMainChartComponent } from '../widget-nps-main/nps-main-chart.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 import { SHARED_FILTER_STATE, ShareFilterState } from '../observables-observer-state/share-filter-state.model';
@@ -58,6 +58,7 @@ import { HeadImageComponent } from '../head-image/head-image.component';
 import {COMPLETE_OBSERVER, CompleteObserver} from '../observables-observer-state/completeObserver';
 import { CreateCompanyComponent } from '../create-company/create-company.component';
 import { MainComponent } from '../main/main.component';
+import { WidgetSgComponent } from '../widget-sg/widget-sg.component';
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -106,7 +107,8 @@ import { MainComponent } from '../main/main.component';
     LoaderComponent,
     HeadImageComponent,
     CreateCompanyComponent,
-    MainComponent
+    MainComponent,
+    WidgetSgComponent
 
   ],
   exports: [LoginComponent, HeadComponent, UploadsComponent, SendSurveyComponent]
