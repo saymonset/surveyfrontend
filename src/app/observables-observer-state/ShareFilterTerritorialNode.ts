@@ -1,8 +1,8 @@
 import { InjectionToken } from '@angular/core';
-
+import { TreeModelTerritorialDTO } from '../dto/TreeModelTerritorialDTO';
 export class ShareFilterTerritorialNode {
 
-  constructor(public node?: string) { }
+  constructor(public treeModelTerritorialDTO?: TreeModelTerritorialDTO) { }
 
 
 }

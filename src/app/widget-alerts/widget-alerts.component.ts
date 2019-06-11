@@ -3,6 +3,7 @@ import { TokenService } from '../service/token.service';
 import { WidgetRepository } from '../repository/widget.repository';
 import { WidgetService } from '../service/widget.service';
 import { NpsChartDTO } from '../dto/NpsChartDTO';
+import { AlertCHARTDTO } from '../dto/AlertCHARTDTO';
 import { FilterCHARTDTO } from '../dto/FilterCHARTDTO';
 import { ChartCHARTDTO } from '../dto/ChartCHARTDTO';
 import { SHARED_FILTER_STATE, ShareFilterState } from '../observables-observer-state/share-filter-state.model';
@@ -12,16 +13,17 @@ import { SHARED_FILTER_SERVICIO_NODE, ShareFilterServicioNode } from '../observa
 import { SHARED_FILTER_EXECUTE, ShareFilterExecute } from '../observables-observer-state/ShareFilterExecute';
 import { Observable, Observer } from 'rxjs';
 import {isUndefined} from 'util';
+import {SatisfactionGeneralCHARTDTO} from '../dto/SatisfactionGeneralCHARTDTO';
 import * as Highcharts from 'highcharts';
 @Component({
-  selector: 'app-nps-main-chart',
-  templateUrl: './nps-main-chart.component.html',
-  styleUrls: ['./nps-main-chart.component.css']
+  selector: 'app-widget-alerts',
+  templateUrl: './widget-alerts.component.html',
+  styleUrls: ['./widget-alerts.component.css']
 })
-export class NpsMainChartComponent implements OnInit {
+export class WidgetAlertsComponent implements OnInit {
   Highcharts:  typeof Highcharts = Highcharts;
   chartOptions:  Highcharts.Options;
-  npsChartDTO: NpsChartDTO = new NpsChartDTO();
+  npsChartDTO: SatisfactionGeneralCHARTDTO = new SatisfactionGeneralCHARTDTO();
   filterCHARTDTO: FilterCHARTDTO = new  FilterCHARTDTO();
   chartCHARTDTO: ChartCHARTDTO = new ChartCHARTDTO();
   error: string;
@@ -67,8 +69,6 @@ export class NpsMainChartComponent implements OnInit {
       }
     });
 
-
-
     servicioNodeEvents.subscribe((update) => {
       // console.log('Observando servicioNodeEvents =' + update.node);
       if (update.treeModelServicioDTO.node != undefined) {
@@ -80,29 +80,9 @@ export class NpsMainChartComponent implements OnInit {
 
     executeEvents.subscribe((update) => {
       if (update.isExecute === '1' || update.isExecute === '2'|| update.isExecute === '3'|| update.isExecute === '4') {
-        this.chartService.nps(this.filterCHARTDTO).subscribe(data => {
+        this.chartService.alerts(this.filterCHARTDTO).subscribe(data => {
+            this.npsChartDTO = new NpsChartDTO();
             this.npsChartDTO = data;
-            this.check = new String(this.npsChartDTO.series[0].data[0]);
-            let splitted = this.check.split(",");
-            let re = "'";
-            let cad = splitted[0].replace(/re/gi,"");
-            let num = splitted[1].replace(/re/gi,"");
-            this.npsChartDTO.series[0].data[0] = [cad, parseFloat(num)];
-
-            this.check = new String(this.npsChartDTO.series[0].data[1]);
-            splitted = this.check.split(",");
-            re = "'";
-            cad = splitted[0].replace(/re/gi,"");
-            num = splitted[1].replace(/re/gi,"");
-            this.npsChartDTO.series[0].data[1] = [cad, parseFloat(num)];
-
-            this.check = new String(this.npsChartDTO.series[0].data[2]);
-            splitted = this.check.split(",");
-            re = "'";
-            cad = splitted[0].replace(/re/gi,"");
-            num = splitted[1].replace(/re/gi,"");
-            this.npsChartDTO.series[0].data[2] = [cad, parseFloat(num)];
-
             this.options = this.npsChartDTO;
             this.chartOptions=  this.options;
             this.loading = false;

@@ -29,7 +29,7 @@ export class WidgetSgComponent implements OnInit {
   check: String;
   loading = true;
   options: object;
-
+  pathTerritorio: string;
 
   constructor(private chartRepository: WidgetRepository, private chartService: WidgetService, @Inject(SHARED_FILTER_STATE) private stateEvents: Observable<ShareFilterState>
     , @Inject(SHARED_FILTER_DATE_END) private dateEndEvents: Observable<ShareFilterDateEnd>,
@@ -61,19 +61,21 @@ export class WidgetSgComponent implements OnInit {
 
     territorialNodeEvents.subscribe((update) => {
       //  console.log('Observando territorialNode =' + update.node);
-      if (update.node != undefined) {
-        this.filterCHARTDTO.territorialNode = update.node;
+      if (update.treeModelTerritorialDTO.node != undefined) {
+        this.filterCHARTDTO.territorialNode = update.treeModelTerritorialDTO.node;
+        this.pathTerritorio = update.treeModelTerritorialDTO.value;
         this.executeObserverEvents.next(new ShareFilterExecute('3'));
       }
     });
 
     servicioNodeEvents.subscribe((update) => {
       // console.log('Observando servicioNodeEvents =' + update.node);
-      if (update.node != undefined) {
-        this.filterCHARTDTO.servicioNode = update.node;
+      if (update.treeModelServicioDTO.node != undefined) {
+        this.filterCHARTDTO.servicioNode = update.treeModelServicioDTO.node;
         this.executeObserverEvents.next(new ShareFilterExecute('4'));
       }
     });
+
 
 
     executeEvents.subscribe((update) => {

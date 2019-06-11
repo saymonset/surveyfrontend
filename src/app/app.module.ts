@@ -7,6 +7,10 @@ import { LoginFirstGuard } from './loginFirst.guard';
 
 import { SurveyComponent } from './survey/survey.component';
 import { SurveytestComponent } from './surveytest/surveytest.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
+
+
 
 
 
@@ -18,8 +22,11 @@ import { SurveytestComponent } from './surveytest/surveytest.component';
 
 
 
+
+
   ],
   imports: [
+    NgbModule,
     BrowserModule,
     LoginModule,
     routing],

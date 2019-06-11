@@ -1,8 +1,8 @@
 import { InjectionToken } from '@angular/core';
-
+import { TreeModelServicioDTO } from '../dto/TreeModelServicioDTO';
 export class ShareFilterServicioNode {
 
-  constructor(public node?: string) { }
+  constructor(public treeModelServicioDTO?: TreeModelServicioDTO) { }
 
 
 }

@@ -1,5 +1,36 @@
+<!--PLANTILLAS-->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Organización territorial</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-division-territorial></app-division-territorial>
+    <app-message-simple [pathTerritorio]="pathTerritorio"></app-message-simple>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Cerrar</button>
+  </div>
+</ng-template>
 
-
+<ng-template #contentServ let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title"> Organización de Servicios</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-division-servicio></app-division-servicio>
+    <app-message-simple [pathServicio]="pathServicio"></app-message-simple>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Cerrar</button>
+  </div>
+</ng-template>
+<!--FIN PLANTILLAS-->
 
 <app-head-image></app-head-image>
 <div class="subnavbar" >
@@ -30,9 +61,24 @@
           <li *ngIf="!isRoot">
             <app-date-to></app-date-to>
           </li>
-          <li></li>
+          <li class="active"  *ngIf="!isRoot">
+          <a href="javascript:;" (click)="openLg(content)" class="shortcut">
+            <i class="shortcut-icon icon-list-alt"></i>
+            <span class="shortcut-label">
+                       Organización territorial
+                </span>
+          </a>
+        </li>
+          <li class="active"  *ngIf="!isRoot">
+            <a href="javascript:;" (click)="openServ(contentServ)" class="shortcut">
+              <i class="shortcut-icon icon-list-alt"></i>
+              <span class="shortcut-label">
+                      Organización de Servicios
+                </span>
+            </a>
+          </li>
           <li>
-            <a href="javascript:;"  (click)="logOut()">
+            <a class="active"  href="javascript:;"  (click)="logOut()">
               <i class="icon-home"></i>
               <span>Cerrar Sesión</span>
             </a>
@@ -43,20 +89,7 @@
     </div> <!-- /container -->
 
   </div> <!-- /subnavbar-inner -->
-  <div class="container-fluid"  *ngIf="isLogin && !isRoot">
-    <div class="row">
-      <div class="col bg-light">
-        <div class="row">
-          <div class="col-md-6 col-xs-12">
-            <app-division-territorial></app-division-territorial>
-          </div>
-          <div class="col-md-6 col-xs-12">
-            <app-division-servicio></app-division-servicio>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+
 </div> <!-- /subnavbar -->
 
 
@@ -68,8 +101,9 @@
 
   <!--SOLO SE USA PARA ROOT-->
 <div *ngIf="isRoot"><app-create-company></app-create-company></div>
-    <!--END SOLO SE USA PARA ROOT-->
 
+    <!--END SOLO SE USA PARA ROOT-->
+    <app-message-simple [pathTerritorio]="pathTerritorio" [pathServicio]="pathServicio"></app-message-simple>
     <div *ngIf="isLogin && !isRoot">
     <div class="row">
       <div class="col-md-6 col-xs-12">
@@ -78,7 +112,7 @@
       <div class="col-md-6">
         <!--<app-nps-main-chart></app-nps-main-chart>-->
         <app-widget-sg></app-widget-sg>
-        <app-cuadrant-chart></app-cuadrant-chart>
+        <app-widget-alerts></app-widget-alerts>
       </div>
     </div>
     </div>

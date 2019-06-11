@@ -59,6 +59,8 @@ import {COMPLETE_OBSERVER, CompleteObserver} from '../observables-observer-state
 import { CreateCompanyComponent } from '../create-company/create-company.component';
 import { MainComponent } from '../main/main.component';
 import { WidgetSgComponent } from '../widget-sg/widget-sg.component';
+import { MessageSimpleComponent } from '../message-simple/message-simple.component';
+import { WidgetAlertsComponent } from '../widget-alerts/widget-alerts.component';
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -108,7 +110,9 @@ import { WidgetSgComponent } from '../widget-sg/widget-sg.component';
     HeadImageComponent,
     CreateCompanyComponent,
     MainComponent,
-    WidgetSgComponent
+    WidgetSgComponent,
+    MessageSimpleComponent,
+    WidgetAlertsComponent
 
   ],
   exports: [LoginComponent, HeadComponent, UploadsComponent, SendSurveyComponent]
