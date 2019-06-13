@@ -15,11 +15,12 @@ export class SendSurveyRepositry {
   apiUrlSent = '';
   apiUrlSentResult = '';
   existSurveyBd = '';
+  surveyDTO: SurveyDTO = new SurveyDTO();
   constructor(private http: HttpClient,
               @Inject(COMPLETE_OBSERVER) private completeUploadFile: Observer<CompleteObserver>) {
     this.baseUrl = AppSettings.API_ENDPOINT;
     this.apiUrl = this.baseUrl + 'survey/send';
-    this.apiUrlSent = this.baseUrl + 'survey/searchSurvey?';
+    this.apiUrlSent = this.baseUrl + 'survey/openAndSendToClientSurvey';
     this.apiUrlSentResult = this.baseUrl + 'survey/sent/result';
     this.existSurveyBd = this.baseUrl + 'survey/existSurveyBd?';
   }
@@ -50,8 +51,19 @@ export class SendSurveyRepositry {
     return  this.http.get<boolean>(this.existSurveyBd + "codeCompany=" + codeCompany);
   }
 
-  sentVerify(codigoEncuesta, email, lang, codeCompany): Observable<SurveyDTO> {
+ /* sentVerify(codigoEncuesta, email, lang, codeCompany): Observable<SurveyDTO> {
     return  this.http.get<SurveyDTO>(this.apiUrlSent + "codigoEncuesta="+codigoEncuesta+"&email="+email+"&lang=" + lang + "&codeCompany=" + codeCompany);
+  }*/
+
+  sentVerify(codigoEncuesta, email, lang, codeCompany): Observable<SurveyDTO> {
+    this.surveyDTO = new SurveyDTO();
+    this.surveyDTO.codigoEncuesta = codigoEncuesta;
+    this.surveyDTO.email = email;
+    this.surveyDTO.lang = lang;
+    this.surveyDTO.codeCompany = codeCompany;
+  //  console.log(codigoEncuesta + ' = codigo encesta saymopn, this.surveyDTO.email ='+this.surveyDTO.email+', this.surveyDTO.codeCompany  = '+this.surveyDTO.codeCompany );
+    // return  this.http.get<SurveyDTO>(this.apiUrlSent + "codigoEncuesta="+codigoEncuesta+"&email="+email+"&lang=" + lang + "&codeCompany=" + codeCompany);
+    return  this.http.post<SurveyDTO>(this.apiUrlSent , this.surveyDTO);
   }
 
   sentResult(objecto: object): Observable<SurveyDTO> {

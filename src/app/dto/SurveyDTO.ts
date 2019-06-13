@@ -5,4 +5,5 @@ export class SurveyDTO {
   public lang: string;
   public email: string;
   public json: string;
+  public codeCompany: string;
 }
