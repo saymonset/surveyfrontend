@@ -9,7 +9,7 @@ html,body{
 }
 
 .portada{
-  background: url(C:/opt/workspace_angular/ecologicalpaper-master/ecologicalpaper_v5-war/war/bienvenido_archivos/tope.jpg) no-repeat fixed center;
+  background: url(../../assets/img/tope.jpg) no-repeat fixed center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;

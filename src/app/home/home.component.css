@@ -1,7 +1,5 @@
-/*
 .portada{
-  background: url(./logo.jpg) no-repeat fixed center;
-
+ /* background: url(assets/img/cerrojo.jpg) no-repeat fixed center;*/
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -11,4 +9,4 @@
   text-align: center;
 
 }
-*/
+
