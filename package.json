@@ -29,7 +29,7 @@
     "date-fns": "^1.30.1",
     "emotion-ratings": "^2.0.2",
     "hammerjs": "^2.0.8",
-    "highcharts": "^7.1.2",
+    "highcharts": "^7.2.2",
     "highcharts-angular": "^2.4.0",
     "igniteui-angular": "^7.3.3",
     "ng2-tree": "^2.0.0-rc.11",
